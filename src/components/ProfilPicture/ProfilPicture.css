@@ -1,0 +1,11 @@
+.profilPicture {
+  -webkit-clip-path: circle();
+          clip-path: circle();
+  shape-outside: circle();
+  width: 12vw;
+  height: 12vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+/*# sourceMappingURL=ProfilPicture.css.map */

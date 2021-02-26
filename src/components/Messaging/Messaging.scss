@@ -1,0 +1,50 @@
+.messaging {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.05);
+
+  .contact {
+    margin: 0;
+    padding: 0;
+    flex: 0.15;
+    list-style: none;
+    li {
+    }
+  }
+
+  .chat {
+    background-color: rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+
+    .messageFlow {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+
+      .oneMessage {
+        display: flex;
+        flex-direction: row;
+        &:hover {
+          background-color: rgba(18, 18, 18, 0.1);
+        }
+
+        &.self {
+          flex-direction: row-reverse;
+          .textContent {
+            text-align: right;
+          }
+        }
+      }
+
+      .profilPicture {
+        place-self: center;
+        width: 75px;
+        height: 75px;
+      }
+    }
+  }
+}

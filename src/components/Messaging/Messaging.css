@@ -1,0 +1,84 @@
+.messaging {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.messaging .contact {
+  margin: 0;
+  padding: 0;
+  -webkit-box-flex: 0.15;
+      -ms-flex: 0.15;
+          flex: 0.15;
+  list-style: none;
+}
+
+.messaging .chat {
+  background-color: rgba(255, 255, 255, 0.08);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.messaging .chat .messageFlow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.messaging .chat .messageFlow .oneMessage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.messaging .chat .messageFlow .oneMessage:hover {
+  background-color: rgba(18, 18, 18, 0.1);
+}
+
+.messaging .chat .messageFlow .oneMessage.self {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.messaging .chat .messageFlow .oneMessage.self .textContent {
+  text-align: right;
+}
+
+.messaging .chat .messageFlow .profilPicture {
+  place-self: center;
+  width: 75px;
+  height: 75px;
+}
+/*# sourceMappingURL=Messaging.css.map */

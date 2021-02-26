@@ -1,0 +1,8 @@
+.profilPicture {
+  clip-path: circle();
+  shape-outside: circle();
+  width: 12vw;
+  height: 12vh;
+  object-fit: cover;
+  cursor: pointer;
+}
