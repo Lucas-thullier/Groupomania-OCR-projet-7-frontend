@@ -5,7 +5,7 @@ import FeedPost from "../FeedPost/FeedPost";
 class Home extends React.Component {
   render() {
     return (
-      <section class="home">
+      <section className="home">
         <FeedPost />
         <FeedPost />
       </section>
