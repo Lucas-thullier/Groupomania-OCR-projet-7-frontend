@@ -1,25 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import Login from "../components/Login/Login";
 import Home from "../components/Home/Home";
 import Navbar from "../components/Navbar/Navbar";
 import Messaging from "../components/Messaging/Messaging";
 import Account from "../components/Account/Account";
-import { Switch, Route } from "react-router-dom";
+import PrivateRoute from "../components/Utils/PrivateRoute";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  useLocation,
+  useHistory,
+  Switch,
+} from "react-router-dom";
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
+export default function App() {
+  return (
+    <>
+      <Router>
         <Navbar />
         <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/messaging" component={Messaging} />
-          <Route path="/reddit" component={Messaging} />
-          <Route path="/myAccount" component={Account} />
-        </Switch>
-      </>
-    );
-  }
-}
+          <PrivateRoute path="/" exact>
+            <Home />
+          </PrivateRoute>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Account />
+          </Route>
+          <PrivateRoute path="/reddit">
+            <Login />
+          </PrivateRoute>
 
-export default App;
+          <PrivateRoute path="/messaging">
+            <Messaging />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </>
+  );
+}

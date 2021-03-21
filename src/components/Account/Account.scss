@@ -1,0 +1,27 @@
+.signupDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+
+  .formTitle {
+    align-self: center;
+  }
+
+  .signupForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 4rem;
+    input,
+    button {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(18, 18, 18, 0.07);
+      color: white;
+      padding: 0;
+    }
+    label {
+      align-self: flex-start;
+    }
+  }
+}

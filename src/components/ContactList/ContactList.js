@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProfilPicture from "../ProfilPicture/ProfilPicture";
-import axios from "axios";
 require("./ContactList.css");
 
-const ContactList = () => {
-  const [allFriends, setAllFriends] = useState(false);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/friends/getAllFriends")
-      .then((allFriendsResponse) => {
-        const allFriends = allFriendsResponse.data;
-        setAllFriends(allFriends);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+const ContactList = ({ allFriends, setFriendId }) => {
   return allFriends ? (
     <ul className="contact">
-      {allFriends.map((singleFriend) => (
-        <li>
+      {allFriends.map((key, singleFriend) => (
+        <li
+          onClick={() => {
+            setFriendId(singleFriend.User.id);
+          }}
+          key={key}
+        >
           <ProfilPicture />
           <p>{singleFriend.User.username}</p>
         </li>
       ))}
     </ul>
   ) : (
-    <div>coucocu</div>
+    <div>cc</div>
   );
 };
 

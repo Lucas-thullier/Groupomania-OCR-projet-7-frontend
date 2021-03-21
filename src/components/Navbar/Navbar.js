@@ -33,7 +33,10 @@ class Navbar extends React.Component {
             <Link to="/reddit"> {redditElement} </Link>
           </li>
           <li>
-            <Link to="/myAccount"> {userElement} </Link>
+            <Link to="/signup"> {userElement} </Link>
+          </li>
+          <li>
+            <Link to="/login"> Log in </Link>
           </li>
         </ul>
       </nav>

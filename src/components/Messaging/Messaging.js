@@ -6,41 +6,59 @@ import axios from "axios";
 require("./Messaging.css");
 
 const Messaging = () => {
-  const [allMessages, setAllMessages] = useState(false);
+  const [allFriends, setAllFriends] = useState(null);
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [actualConv, setActualConv] = useState(null);
+  const [convId, setConvId] = useState(null);
+  const [friendId, setFriendId] = useState(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/conversation")
-      .then((conversationResponse) => {
-        const conversationMessages = conversationResponse.data;
-        setAllMessages(conversationMessages);
+      .get(`http://localhost:3001/friends/getAllFriends?userId=${userId}`)
+      .then((allFriendsResponse) => {
+        setAllFriends(allFriendsResponse.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
   }, []);
 
-  return allMessages ? (
+  useEffect(() => {
+    if (friendId) {
+      axios
+        .get(
+          `http://localhost:3001/conversation/byUserAndFriend?userId=${userId}&friendId=${friendId}`
+        )
+        .then((conversationResponse) => {
+          setConvId(conversationResponse.data.convId);
+
+          setActualConv(conversationResponse.data.messagesData);
+        });
+    }
+  }, [friendId]);
+
+  return (
     <section className="messaging">
-      <ContactList />
+      <ContactList allFriends={allFriends} setFriendId={setFriendId} />
       <div className="chat">
         <div className="messageFlow">
-          {allMessages.map((singleMessage) => (
-            <div className="oneMessage self">
-              {/* self doit etre rendu dynamique en fonction de la personne co */}
-              <ProfilPicture />
-              <div className="textContent">
-                <p className="username">{singleMessage.User.username}</p>
-                <p className="messageContent">{singleMessage.text_content}</p>
+          {actualConv ? (
+            actualConv.map((key, singleMessage) => (
+              <div key={key} className="oneMessage self">
+                <ProfilPicture />
+                <div className="textContent">
+                  <p className="username">{singleMessage.User.username}</p>
+                  <p className="messageContent">{singleMessage.text_content}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div>cc</div>
+          )}
         </div>
-        <PostReaction />
+        <PostReaction userId={userId} convId={convId} />
       </div>
     </section>
-  ) : (
-    <div>coucou</div>
   );
 };
 
