@@ -19,31 +19,5 @@
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-
-    .messageFlow {
-      display: flex;
-      flex-direction: column-reverse;
-
-      .oneMessage {
-        display: flex;
-        flex-direction: row;
-        &:hover {
-          background-color: rgba(18, 18, 18, 0.1);
-        }
-
-        &.self {
-          flex-direction: row-reverse;
-          .textContent {
-            text-align: right;
-          }
-        }
-      }
-
-      .profilPicture {
-        place-self: center;
-        width: 75px;
-        height: 75px;
-      }
-    }
   }
 }

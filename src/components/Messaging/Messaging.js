@@ -3,20 +3,23 @@ import PostReaction from "../PostReaction/PostReaction";
 import ProfilPicture from "../ProfilPicture/ProfilPicture";
 import ContactList from "../ContactList/ContactList";
 import axios from "axios";
+import MessagesFlow from "../MessagesFlow/MessagesFlow";
 require("./Messaging.css");
 
 const Messaging = () => {
-  const [allFriends, setAllFriends] = useState(null);
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [actualConv, setActualConv] = useState(null);
   const [convId, setConvId] = useState(null);
-  const [friendId, setFriendId] = useState(null);
+  const [allConv, setAllConv] = useState(null);
+  const [allMessages, setAllMessages] = useState(null);
+  const [isMessageSend, setIsMessageSend] = useState(null);
+  // const [friendId, setFriendId] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/friends/getAllFriends?userId=${userId}`)
-      .then((allFriendsResponse) => {
-        setAllFriends(allFriendsResponse.data);
+      .get(`http://localhost:3001/conversation/getAllConvByUserId?userId=${userId}`)
+      .then((allConvResponse) => {
+        setAllConv(allConvResponse.data);
       })
       .catch((e) => {
         console.log(e);
@@ -24,39 +27,26 @@ const Messaging = () => {
   }, []);
 
   useEffect(() => {
-    if (friendId) {
+    if (convId) {
       axios
-        .get(
-          `http://localhost:3001/conversation/byUserAndFriend?userId=${userId}&friendId=${friendId}`
-        )
-        .then((conversationResponse) => {
-          setConvId(conversationResponse.data.convId);
-
-          setActualConv(conversationResponse.data.messagesData);
+        .get(`http://localhost:3001/messages/getMessagesByConvId?convId=${convId}`)
+        .then((allMessages) => {
+          setAllMessages(allMessages.data);
         });
     }
-  }, [friendId]);
+  }, [convId, isMessageSend]);
+
+  useEffect(() => {
+    if (isMessageSend) {
+    }
+  }, [isMessageSend]);
 
   return (
     <section className="messaging">
-      <ContactList allFriends={allFriends} setFriendId={setFriendId} />
+      <ContactList allConv={allConv} setConvId={setConvId} />
       <div className="chat">
-        <div className="messageFlow">
-          {actualConv ? (
-            actualConv.map((key, singleMessage) => (
-              <div key={key} className="oneMessage self">
-                <ProfilPicture />
-                <div className="textContent">
-                  <p className="username">{singleMessage.User.username}</p>
-                  <p className="messageContent">{singleMessage.text_content}</p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>cc</div>
-          )}
-        </div>
-        <PostReaction userId={userId} convId={convId} />
+        {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
+        <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
       </div>
     </section>
   );

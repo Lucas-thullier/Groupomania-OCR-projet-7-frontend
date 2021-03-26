@@ -1,0 +1,13 @@
+input {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(18, 18, 18, 0.07);
+  color: white;
+  padding: 0;
+}
+
+button {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(18, 18, 18, 0.07);
+  color: white;
+}
+/*# sourceMappingURL=SearchBar.css.map */

@@ -12,7 +12,7 @@ const smileElement = <FontAwesomeIcon icon={faSmile} />;
 const shareElement = <FontAwesomeIcon icon={faShareAlt} />;
 const gifElement = <FontAwesomeIcon icon={faGoodreads} />;
 
-const PostReaction = ({ userId, convId }) => {
+const PostReaction = ({ userId, convId, setIsMessageSend }) => {
   const [messageContent, setMessageContent] = useState(null);
 
   const onMessageChange = (messageChangeEvent) => {
@@ -27,15 +27,20 @@ const PostReaction = ({ userId, convId }) => {
         convId: convId,
         userId: userId,
       });
-
       axios
-        .post("http://localhost:3001/message/newMessage", messageToSend, {
+        .post("http://localhost:3001/messages/newMessage", messageToSend, {
           headers: {
             "content-type": "application/json",
           },
         })
         .then((response) => {
           console.log(response);
+          if (response.data.message === "true") {
+            setIsMessageSend(true);
+            setIsMessageSend(false);
+          } else {
+            setIsMessageSend(false);
+          }
         })
         .catch((error) => {
           console.log(error);
