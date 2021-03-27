@@ -33,6 +33,11 @@ nav ul li {
   margin: 0 0.5rem;
 }
 
+nav ul .signout {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 nav a {
   color: white;
 }

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./PostReaction.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
+import utils from "../Utils/utils";
 import axios from "axios";
 
 const PaperPlaneElement = <FontAwesomeIcon icon={faPaperPlane} />;
@@ -28,16 +29,16 @@ const PostReaction = ({ userId, convId, setIsMessageSend }) => {
         userId: userId,
       });
       axios
-        .post("http://localhost:3001/messages/newMessage", messageToSend, {
-          headers: {
-            "content-type": "application/json",
-          },
-        })
+        .post(
+          "http://localhost:3001/messages/newMessage",
+          messageToSend,
+          utils.prepareHeaders(document.cookie)
+        )
         .then((response) => {
-          console.log(response);
           if (response.data.message === "true") {
             setIsMessageSend(true);
             setIsMessageSend(false);
+            document.getElementById("sendResponse").value = "";
           } else {
             setIsMessageSend(false);
           }
@@ -56,6 +57,8 @@ const PostReaction = ({ userId, convId, setIsMessageSend }) => {
       </ul>
       <form method="POST" onSubmit={handleSubmit}>
         <input
+          autoComplete="off"
+          id="sendResponse"
           type="text"
           name="sendResponse"
           placeholder="Encore une super journée..."

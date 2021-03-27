@@ -1,11 +1,11 @@
-html {
+html,
+body,
+#root {
   height: 100%;
 }
-
-body {
-  background-color: rgba(18, 18, 18, 1);
-  color: white;
-  height: 100%;
+#root {
   display: flex;
   flex-direction: column;
+  background-color: rgba(18, 18, 18, 1);
+  color: white;
 }

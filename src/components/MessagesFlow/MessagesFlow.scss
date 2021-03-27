@@ -1,7 +1,7 @@
-.messageFlow {
+.messagesFlow {
   display: flex;
-  flex-direction: column-reverse;
-
+  flex-direction: column;
+  overflow-y: auto;
   .oneMessage {
     display: flex;
     flex-direction: row;

@@ -29,9 +29,9 @@ const Account = () => {
   }
 
   return (
-    <div className="signupDiv">
-      <h1 className="formTitle">S'inscrire</h1>
+    <main className="signupDiv">
       <form className="signupForm" onSubmit={signUp}>
+        <h1 className="formTitle">S'inscrire</h1>
         <label htmlFor="username">Prénom</label>
         <input type="text" id="username" />
 
@@ -41,9 +41,11 @@ const Account = () => {
         <label htmlFor="password">Mot de passe</label>
         <input type="password" id="password" />
 
-        <button type="submit">S'inscrire</button>
+        <button className="submitButton" type="submit">
+          S'inscrire
+        </button>
       </form>
-    </div>
+    </main>
   );
 };
 

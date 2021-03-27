@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PostReaction from "../PostReaction/PostReaction";
 import ProfilPicture from "../ProfilPicture/ProfilPicture";
-import ContactList from "../ContactList/ContactList";
+import ConversationsList from "../ConversationsList/ConversationsList";
 import axios from "axios";
 import MessagesFlow from "../MessagesFlow/MessagesFlow";
+import utils from "../Utils/utils";
 require("./Messaging.css");
 
 const Messaging = () => {
@@ -13,42 +14,48 @@ const Messaging = () => {
   const [allConv, setAllConv] = useState(null);
   const [allMessages, setAllMessages] = useState(null);
   const [isMessageSend, setIsMessageSend] = useState(null);
+  const [isNewConversation, setIsNewConversation] = useState(null);
   // const [friendId, setFriendId] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/conversation/getAllConvByUserId?userId=${userId}`)
+      .get(
+        `http://localhost:3001/conversation/getAllConvByUserId?userId=${userId}`,
+        utils.prepareHeaders(document.cookie)
+      )
       .then((allConvResponse) => {
         setAllConv(allConvResponse.data);
       })
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [isNewConversation]);
 
   useEffect(() => {
     if (convId) {
       axios
-        .get(`http://localhost:3001/messages/getMessagesByConvId?convId=${convId}`)
+        .get(
+          `http://localhost:3001/messages/getMessagesByConvId?convId=${convId}`,
+          utils.prepareHeaders(document.cookie)
+        )
         .then((allMessages) => {
           setAllMessages(allMessages.data);
         });
     }
   }, [convId, isMessageSend]);
 
-  useEffect(() => {
-    if (isMessageSend) {
-    }
-  }, [isMessageSend]);
-
   return (
-    <section className="messaging">
-      <ContactList allConv={allConv} setConvId={setConvId} />
-      <div className="chat">
+    <main className="messaging">
+      <ConversationsList
+        allConv={allConv}
+        setConvId={setConvId}
+        setIsNewConversation={setIsNewConversation}
+      />
+      <section className="chat">
         {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
         <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
-      </div>
-    </section>
+      </section>
+    </main>
   );
 };
 

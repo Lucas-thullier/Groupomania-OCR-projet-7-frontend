@@ -1,11 +1,22 @@
-input {
+.searchWrapper {
+  -webkit-box-flex: 0.03;
+      -ms-flex: 0.03;
+          flex: 0.03;
+}
+
+.searchWrapper .searchBar {
+  position: absolute;
+  z-index: 5;
+}
+
+.searchWrapper .searchBar .searchBarInput {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(18, 18, 18, 0.07);
   color: white;
   padding: 0;
 }
 
-button {
+.searchWrapper .searchBar button {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(18, 18, 18, 0.07);
   color: white;

@@ -15,6 +15,7 @@ import {
   useHistory,
   Switch,
 } from "react-router-dom";
+import UserPage from "../components/UserPage/UserPage";
 
 export default function App() {
   return (
@@ -34,9 +35,11 @@ export default function App() {
           <PrivateRoute path="/reddit">
             <Login />
           </PrivateRoute>
-
           <PrivateRoute path="/messaging">
             <Messaging />
+          </PrivateRoute>
+          <PrivateRoute path="/userPage/:id">
+            <UserPage />
           </PrivateRoute>
         </Switch>
       </Router>

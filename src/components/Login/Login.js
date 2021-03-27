@@ -23,9 +23,8 @@ const Login = () => {
         },
       })
       .then((response) => {
-        localStorage.setItem("token", response.data.token);
+        document.cookie = `authToken=${response.data.token}; sameSite=Strict`;
         localStorage.setItem("userId", response.data.userId);
-        localStorage.setItem("isLogged", true);
       })
       .catch((error) => {
         console.log(error);
@@ -33,18 +32,20 @@ const Login = () => {
   };
 
   return (
-    <div className="signupDiv">
-      <h1 className="formTitle">Connexion</h1>
+    <main className="signupDiv">
       <form className="signupForm" onSubmit={login}>
+        <h1 className="formTitle">Connexion</h1>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" />
 
         <label htmlFor="password">Mot de passe</label>
         <input type="password" id="password" />
 
-        <button type="submit">Se connecter</button>
+        <button className="submitButton" type="submit">
+          Se connecter
+        </button>
       </form>
-    </div>
+    </main>
   );
 };
 

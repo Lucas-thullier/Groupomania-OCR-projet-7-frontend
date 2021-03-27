@@ -3,8 +3,13 @@ import ProfilPicture from "../ProfilPicture/ProfilPicture";
 require("./MessagesFlow.css");
 
 const MessagesFlow = ({ allMessages }) => {
+  useEffect(() => {
+    const MessagesFlowDiv = document.getElementsByClassName("messagesFlow")[0];
+    MessagesFlowDiv.scrollTop = MessagesFlowDiv.scrollHeight;
+  }, [allMessages]);
+
   return (
-    <div className="messageFlow">
+    <div className="messagesFlow">
       {allMessages.map((singleMessage, key) => (
         <div key={key} className="oneMessage self">
           <ProfilPicture />

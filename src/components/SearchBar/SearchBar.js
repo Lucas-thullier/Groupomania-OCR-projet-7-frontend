@@ -1,27 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchBar.css";
 import axios from "axios";
-import FriendSearchPreview from "../FriendSearchPreview/FriendSearchPreview";
+import UserSearchPreview from "../UserSearchPreview/UserSearchPreview";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import utils from "../Utils/utils";
 const searchElement = <FontAwesomeIcon icon={faSearch} />;
 
-const SearchBar = () => {
+const SearchBar = ({ searchFor, setIsNewConversation }) => {
   const [searchResult, setSearchResult] = useState(null);
-  const [isSearchBarBlured, setIsSearchBarBlured] = useState(null);
   const [isSearchBarFocused, setIsSearchBarFocused] = useState(null);
   const [isSearchBarEmpty, setIsSearchBarEmpty] = useState(null);
+  const [searchContent, setSearchContent] = useState(null);
 
-  const onSearchChange = (messageChangeEvent) => {
-    const searchContent = messageChangeEvent.target.value;
-    if (searchContent.length > 0) {
-      setIsSearchBarEmpty(false);
-    } else {
-      setIsSearchBarEmpty(true);
-    }
+  useEffect(() => {
     if (searchContent) {
+      if (searchContent.length > 0) {
+        setIsSearchBarEmpty(false);
+      } else {
+        setIsSearchBarEmpty(true);
+      }
+
       axios
-        .get(`http://localhost:3001/user/searchUser?searchContent=${searchContent}`)
+        .get(searchUrl, utils.prepareHeaders(document.cookie))
         .then((searchResponse) => {
           setSearchResult(searchResponse.data);
         })
@@ -31,40 +32,55 @@ const SearchBar = () => {
     } else {
       setSearchResult(null);
     }
-  };
+  }, [searchContent]);
 
-  const handleBlur = (bluredEvent) => {
-    setIsSearchBarFocused(false);
-    if (bluredEvent) {
-      setIsSearchBarBlured(true);
-    }
+  const clearSearchBar = () => {
+    document.getElementsByClassName("searchBarInput")[0].value = "";
+    setSearchResult(null);
   };
 
   const handleFocus = (focusEvent) => {
-    setIsSearchBarBlured(false);
     if (focusEvent) {
       setIsSearchBarFocused(true);
     }
   };
 
+  const onSearchChange = (messageChangeEvent) => {
+    setSearchContent(messageChangeEvent.target.value);
+  };
+
+  let searchUrl;
+  switch (searchFor) {
+    case "users":
+      searchUrl = `http://localhost:3001/user/searchUser?searchContent=${searchContent}`;
+      break;
+    case "friends":
+      const userId = localStorage.getItem("userId");
+      searchUrl = `http://localhost:3001/user/searchFriendUsers?searchContent=${searchContent}&userId=${userId}`;
+      break;
+    default:
+      break;
+  }
+
   return (
-    <div>
-      <input
-        className="searchBar"
-        type="text"
-        onChange={onSearchChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      />
-      <button> {searchElement} </button>
-      {
-        <FriendSearchPreview
+    <div className="searchWrapper">
+      <div className="searchBar">
+        <input
+          className="searchBarInput"
+          type="text"
+          onChange={onSearchChange}
+          onFocus={handleFocus}
+        />
+        <button> {searchElement} </button>
+        <UserSearchPreview
+          setIsNewConversation={setIsNewConversation}
           searchResult={searchResult}
-          isSearchBarBlured={isSearchBarBlured}
           isSearchBarFocused={isSearchBarFocused}
           isSearchBarEmpty={isSearchBarEmpty}
+          clearInput={clearSearchBar}
+          searchFor={searchFor}
         />
-      }
+      </div>
     </div>
   );
 };
