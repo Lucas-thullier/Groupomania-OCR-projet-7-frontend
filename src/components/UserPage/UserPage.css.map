@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,gBAAgB,EAAE,yBAAyB;EAC3C,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,GAAG;EAClB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,eAAe,EAAE,MAAM;CAQxB;;AAdD,AAOE,UAPQ,CAOR,SAAS,CAAC;EACR,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,WAAW,EAAE,MAAM;CACpB",
+    "sources": [
+        "UserPage.scss"
+    ],
+    "names": [],
+    "file": "UserPage.css"
+}

@@ -1,0 +1,15 @@
+.userPanel {
+  background-color: rgba(255, 255, 255, 0.08);
+  margin: 2rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .userHead {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+  }
+  .userBody {
+  }
+}

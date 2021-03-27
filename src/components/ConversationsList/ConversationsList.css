@@ -1,0 +1,49 @@
+.contactPanel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 0.15;
+      -ms-flex: 0.15 1;
+          flex: 0.15 1;
+}
+
+.contactPanel .contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contactPanel .contact .test {
+  display: block;
+}
+
+.contactPanel .contact li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  place-items: center;
+}
+
+.contactPanel .contact li .profilPicture {
+  height: 50px;
+  width: 50px;
+  margin: 0.5rem;
+}
+
+.contactPanel .contact li p {
+  margin: 0.5rem;
+}
+
+.contactPanel .contact li:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+/*# sourceMappingURL=ConversationsList.css.map */
