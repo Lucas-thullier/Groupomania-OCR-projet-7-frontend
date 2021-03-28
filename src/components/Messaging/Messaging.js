@@ -5,6 +5,7 @@ import ConversationsList from "../ConversationsList/ConversationsList";
 import axios from "axios";
 import MessagesFlow from "../MessagesFlow/MessagesFlow";
 import utils from "../Utils/utils";
+import ChatHeader from "../ChatHeader/ChatHeader";
 require("./Messaging.css");
 
 const Messaging = () => {
@@ -54,11 +55,16 @@ const Messaging = () => {
       />
       {convId ? (
         <section className="chat">
-          {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
-          <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
+          <ChatHeader />
+          <div className="chatBody">
+            {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
+            <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
+          </div>
         </section>
       ) : (
-        <div>conversation placeholder</div>
+        <div className="chatBodyPlaceholder">
+          <span>Débutez une conversation avec le panel de gauche &#128172;</span>
+        </div>
       )}
     </main>
   );
