@@ -12,8 +12,16 @@ exports.prepareHeaders = (cookiesString, otherContentType = null) => {
   return headers;
 };
 
+exports.clearAuthCookie = () => {
+  document.cookie = "authToken" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=Strict`";
+};
+
 function getAuthToken(cookiesString) {
   const authTokenRegex = /(?<=authToken=).+(?=(?:\; |$))/;
-  const authToken = cookiesString.match(authTokenRegex)[0];
-  return authToken;
+  if (authTokenRegex.test(cookiesString)) {
+    const authToken = cookiesString.match(authTokenRegex)[0];
+    return authToken;
+  } else {
+    return false;
+  }
 }

@@ -9,13 +9,11 @@ require("./Messaging.css");
 
 const Messaging = () => {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [actualConv, setActualConv] = useState(null);
   const [convId, setConvId] = useState(null);
   const [allConv, setAllConv] = useState(null);
   const [allMessages, setAllMessages] = useState(null);
   const [isMessageSend, setIsMessageSend] = useState(null);
   const [isNewConversation, setIsNewConversation] = useState(null);
-  // const [friendId, setFriendId] = useState(null);
 
   useEffect(() => {
     axios
@@ -40,6 +38,9 @@ const Messaging = () => {
         )
         .then((allMessages) => {
           setAllMessages(allMessages.data);
+        })
+        .catch((e) => {
+          console.log(e);
         });
     }
   }, [convId, isMessageSend]);
@@ -51,10 +52,14 @@ const Messaging = () => {
         setConvId={setConvId}
         setIsNewConversation={setIsNewConversation}
       />
-      <section className="chat">
-        {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
-        <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
-      </section>
+      {convId ? (
+        <section className="chat">
+          {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
+          <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
+        </section>
+      ) : (
+        <div>conversation placeholder</div>
+      )}
     </main>
   );
 };

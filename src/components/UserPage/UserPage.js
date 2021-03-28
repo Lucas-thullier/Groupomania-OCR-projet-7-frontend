@@ -6,6 +6,7 @@ import "./UserPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import utils from "../Utils/utils";
+import FriendList from "../FriendList/FriendList";
 
 const addFriendFont = <FontAwesomeIcon icon={faUserPlus} />;
 
@@ -39,6 +40,15 @@ const UserPage = () => {
       utils.prepareHeaders(document.cookie)
     );
   };
+
+  const changeProfilPicture = (submitEvent) => {
+    submitEvent.preventDefault();
+    console.log(document.getElementById("newProfilPicture").files[0]);
+    const formData = new formData();
+    // const newProfilPicture = document.getElementById("newProfilPicture").value;
+    // console.log(newProfilPicture);
+    // axios.post('http://localhost:3001/user/changeProfilPicture', , )
+  };
   if (userData) {
     return (
       <section className="userPanel">
@@ -48,8 +58,14 @@ const UserPage = () => {
           <button className="addUserButton" onClick={addFriend}>
             {addFriendFont}
           </button>
+          <form onSubmit={changeProfilPicture}>
+            <input type="file" id="newProfilPicture" name="filename" />
+            <input type="submit" />
+          </form>
         </div>
-        <div className="userBody">blabla</div>
+        <div className="userBody">
+          <FriendList />
+        </div>
       </section>
     );
   } else {

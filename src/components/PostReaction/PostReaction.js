@@ -26,7 +26,6 @@ const PostReaction = ({ userId, convId, setIsMessageSend }) => {
       const messageToSend = JSON.stringify({
         messageContent: messageContent,
         convId: convId,
-        userId: userId,
       });
       axios
         .post(

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,8 +7,8 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import SearchBar from "../SearchBar/SearchBar";
+const utils = require("../Utils/utils");
 
 const userElement = <FontAwesomeIcon icon={faUserAlt} />;
 const redditElement = <FontAwesomeIcon icon={faReddit} />;
@@ -17,10 +17,14 @@ const signOutElement = <FontAwesomeIcon icon={faSignOutAlt} />;
 
 const Navbar = () => {
   const searchFor = "users";
-  const userId = localStorage.getItem("userId");
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  // const userId = localStorage.getItem("userId");
+
   const disconnect = () => {
+    utils.clearAuthCookie();
     localStorage.clear();
   };
+
   return (
     <nav>
       <Link to="/">
@@ -35,14 +39,11 @@ const Navbar = () => {
         <li>
           <Link to="/reddit"> {redditElement} </Link>
         </li>
-        {/* <li>
-          <Link to="/signup"> {userElement} </Link>
-        </li> */}
         <li>
           <Link to={`/userPage/${userId}`}>{userElement}</Link>
         </li>
         <li className="signout" onClick={() => disconnect()}>
-          {signOutElement}
+          <Link to="/login">{signOutElement}</Link>
         </li>
       </ul>
     </nav>
