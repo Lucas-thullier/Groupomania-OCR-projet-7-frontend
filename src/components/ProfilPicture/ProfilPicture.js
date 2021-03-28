@@ -1,11 +1,8 @@
-import React from "react";
-import testPicture from "./1.jpg";
+import React, { useEffect, useState } from "react";
 require("./ProfilPicture.css");
 
-const ProfilePicture = () => {
-  return (
-    <img className="profilPicture" src={testPicture} alt="Profile picture of" />
-  );
+const ProfilePicture = ({ imageUrl }) => {
+  return <img className="profilPicture" src={imageUrl} alt="Profile picture of" />;
 };
 
 export default ProfilePicture;

@@ -43,21 +43,30 @@ const UserPage = () => {
 
   const changeProfilPicture = (submitEvent) => {
     submitEvent.preventDefault();
-    console.log(document.getElementById("newProfilPicture").files[0]);
-    const formData = new formData();
-    // const newProfilPicture = document.getElementById("newProfilPicture").value;
-    // console.log(newProfilPicture);
-    // axios.post('http://localhost:3001/user/changeProfilPicture', , )
+    const newProfilPicture = submitEvent.target.querySelector("input#newProfilPicture").files[0];
+    const formData = new FormData();
+    formData.append("image", newProfilPicture);
+    console.log(formData);
+    axios.post(
+      "http://localhost:3001/user/changeProfilPicture",
+      formData,
+      utils.prepareHeaders(document.cookie, "multipart/form-data")
+    );
   };
+
   if (userData) {
     return (
       <section className="userPanel">
         <div className="userHead">
-          <ProfilePicture />
+          <ProfilePicture imageUrl={userData.imageUrl} />
           <p>{userData.username}</p>
-          <button className="addUserButton" onClick={addFriend}>
-            {addFriendFont}
-          </button>
+          {userData.id == localStorage.getItem("userId") ? (
+            <></>
+          ) : (
+            <button className="addUserButton" onClick={addFriend}>
+              {addFriendFont}
+            </button>
+          )}
           <form onSubmit={changeProfilPicture}>
             <input type="file" id="newProfilPicture" name="filename" />
             <input type="submit" />

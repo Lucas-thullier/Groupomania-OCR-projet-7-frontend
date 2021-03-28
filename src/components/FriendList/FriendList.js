@@ -23,7 +23,7 @@ const FriendList = () => {
         <h1>Mes amis</h1>
         {friendList.map((singleFriend, key) => (
           <div className="singleFriend" key={key}>
-            <ProfilePicture />
+            <ProfilePicture imageUrl={singleFriend.imageUrl} />
             {singleFriend.username}
           </div>
         ))}

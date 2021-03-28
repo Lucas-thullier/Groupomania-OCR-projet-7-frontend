@@ -39,7 +39,7 @@ const UserSearchPreview = ({
       case "users":
         return (
           <Link to={`/userPage/${singleSearchResult.id}`}>
-            <ProfilPicture />
+            <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
             <span>{singleSearchResult.username}</span>
           </Link>
         );
@@ -48,7 +48,7 @@ const UserSearchPreview = ({
         const friendId = singleSearchResult.id;
         return (
           <div onClick={() => createConversation(userId, friendId)}>
-            <ProfilPicture />
+            <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
             <span>{singleSearchResult.username}</span>
           </div>
         );
