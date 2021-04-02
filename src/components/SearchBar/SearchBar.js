@@ -32,11 +32,12 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
     } else {
       setSearchResult(null);
     }
-  }, [searchContent]);
+  }, [searchContent, isSearchBarFocused]);
 
   const clearSearchBar = () => {
-    document.getElementsByClassName("searchBarInput")[0].value = "";
-    setSearchResult(null);
+    document.querySelectorAll(".searchWrapper >.searchBar > .searchBarInput").forEach((element) => {
+      element.value = "";
+    });
   };
 
   const handleFocus = (focusEvent) => {
@@ -45,6 +46,15 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
     }
   };
 
+  const handleBlur = (blurEvent) => {
+    setIsSearchBarFocused(false);
+    if (blurEvent) {
+      setTimeout(() => {
+        setSearchResult(null);
+        clearSearchBar();
+      }, 200);
+    }
+  };
   const onSearchChange = (messageChangeEvent) => {
     setSearchContent(messageChangeEvent.target.value);
   };
@@ -70,6 +80,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
           type="text"
           onChange={onSearchChange}
           onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         <button> {searchElement} </button>
         <UserSearchPreview

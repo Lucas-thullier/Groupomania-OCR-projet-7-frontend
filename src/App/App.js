@@ -16,6 +16,7 @@ import {
   Switch,
 } from "react-router-dom";
 import UserPage from "../components/UserPage/UserPage";
+import Reddit from "../components/Reddit/Reddit";
 
 export default function App() {
   return (
@@ -33,7 +34,7 @@ export default function App() {
             <Account />
           </Route>
           <PrivateRoute path="/reddit">
-            <Login />
+            <Reddit />
           </PrivateRoute>
           <PrivateRoute path="/messaging">
             <Messaging />

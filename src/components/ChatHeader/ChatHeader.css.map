@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,eAAe,EAAE,QAAQ;CAU1B;;AAbD,AAIE,WAJS,CAIT,cAAc,CAAC;EACb,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACb;;AAPH,AASI,WATO,CAQT,cAAc,CACZ,UAAU,CAAC;EACT,QAAQ,EAAE,QAAQ;CACnB",
     "sources": [
         "ChatHeader.scss"
     ],

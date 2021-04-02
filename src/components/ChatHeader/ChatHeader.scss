@@ -1,0 +1,14 @@
+.chatHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  .profilPicture {
+    width: 75px;
+    height: 75px;
+  }
+  .searchWrapper {
+    .searchBar {
+      position: relative;
+    }
+  }
+}

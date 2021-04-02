@@ -10,11 +10,13 @@ require("./Messaging.css");
 
 const Messaging = () => {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [convId, setConvId] = useState(null);
   const [allConv, setAllConv] = useState(null);
   const [allMessages, setAllMessages] = useState(null);
   const [isMessageSend, setIsMessageSend] = useState(null);
   const [isNewConversation, setIsNewConversation] = useState(null);
+
+  const [selectedConversation, setSelectedConversation] = useState(null);
+  const [isPictureChanged, setIsPictureChanged] = useState(null);
 
   useEffect(() => {
     axios
@@ -28,10 +30,11 @@ const Messaging = () => {
       .catch((e) => {
         console.log(e);
       });
-  }, [isNewConversation]);
+  }, [isNewConversation, isPictureChanged]);
 
   useEffect(() => {
-    if (convId) {
+    if (selectedConversation) {
+      const convId = selectedConversation.id;
       axios
         .get(
           `http://localhost:3001/messages/getMessagesByConvId?convId=${convId}`,
@@ -44,21 +47,29 @@ const Messaging = () => {
           console.log(e);
         });
     }
-  }, [convId, isMessageSend]);
+  }, [selectedConversation, isMessageSend]);
 
   return (
     <main className="messaging">
       <ConversationsList
         allConv={allConv}
-        setConvId={setConvId}
+        setSelectedConversation={setSelectedConversation}
         setIsNewConversation={setIsNewConversation}
       />
-      {convId ? (
+      {selectedConversation ? (
         <section className="chat">
-          <ChatHeader />
+          <ChatHeader
+            setIsPictureChanged={setIsPictureChanged}
+            isPictureChanged={isPictureChanged}
+            singleConversation={selectedConversation}
+          />
           <div className="chatBody">
             {allMessages ? <MessagesFlow allMessages={allMessages} /> : <div>cc</div>}
-            <PostReaction userId={userId} convId={convId} setIsMessageSend={setIsMessageSend} />
+            <PostReaction
+              userId={userId}
+              convId={selectedConversation.id}
+              setIsMessageSend={setIsMessageSend}
+            />
           </div>
         </section>
       ) : (

@@ -1,1 +1,22 @@
-/* No CSS *//*# sourceMappingURL=ChatHeader.css.map */
+.chatHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.chatHeader .profilPicture {
+  width: 75px;
+  height: 75px;
+}
+
+.chatHeader .searchWrapper .searchBar {
+  position: relative;
+}
+/*# sourceMappingURL=ChatHeader.css.map */
