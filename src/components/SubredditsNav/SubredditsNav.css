@@ -1,0 +1,14 @@
+.subredditsNav {
+  position: absolute;
+  z-index: 50;
+}
+
+.subredditsNav .singleSubreddit {
+  cursor: pointer;
+  padding: 0.1rem;
+}
+
+.subredditsNav .singleSubreddit:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+/*# sourceMappingURL=SubredditsNav.css.map */

@@ -5,7 +5,7 @@ import ProfilePicture from "../ProfilPicture/ProfilPicture";
 import "./UserPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 import FriendList from "../FriendList/FriendList";
 
 const addFriendFont = <FontAwesomeIcon icon={faUserPlus} />;
@@ -16,10 +16,7 @@ const UserPage = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:3001/user/userById?userId=${id}`,
-        utils.prepareHeaders(document.cookie)
-      )
+      .get(`http://localhost:3001/user/userById?userId=${id}`, prepareHeaders(document.cookie))
       .then((response) => {
         setUserData(response.data);
       })
@@ -34,11 +31,7 @@ const UserPage = () => {
       newFriendId: id,
     };
     postData = JSON.stringify(postData);
-    axios.post(
-      "http://localhost:3001/user/addFriend",
-      postData,
-      utils.prepareHeaders(document.cookie)
-    );
+    axios.post("http://localhost:3001/user/addFriend", postData, prepareHeaders(document.cookie));
   };
 
   const changeProfilPicture = (submitEvent) => {
@@ -47,11 +40,7 @@ const UserPage = () => {
     const formData = new FormData();
     formData.append("image", newProfilPicture);
     console.log(formData);
-    axios.post(
-      "http://localhost:3001/user/changeProfilPicture",
-      formData,
-      utils.prepareHeaders(document.cookie, "multipart/form-data")
-    );
+    axios.post("http://localhost:3001/user/changeProfilPicture", formData, prepareHeaders(document.cookie, "multipart/form-data"));
   };
 
   if (userData) {

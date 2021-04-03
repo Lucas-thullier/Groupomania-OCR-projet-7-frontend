@@ -1,16 +1,39 @@
 .userSearchPreview {
-  background-color: #121212;
+  background-color: #1a1818;
   width: 100%;
-  .singleUserSearchPreview > * {
+  .singleUserSearchPreview {
     text-decoration: none;
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    place-items: center;
+    align-items: center;
+
+    // place-items: center;
     padding: 0.3rem 0;
     &:hover {
       background-color: rgba(255, 255, 255, 0.08);
     }
+    .previewUsername {
+      flex: 1;
+      display: grid;
+      align-items: center;
+    }
+    .friendStatut {
+      flex: 0.3;
+      place-items: center;
+      display: grid;
+      .friendshipLogo {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .friendshipCheck {
+        color: green;
+        right: 0.7rem;
+        top: 0.7rem;
+      }
+    }
+    // #userStatut {
+    //   display: flex;
+    // }
   }
   .noResult {
     display: flex;

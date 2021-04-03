@@ -1,7 +1,7 @@
 import axios from "axios";
 import ProfilePicture from "../ProfilPicture/ProfilPicture";
 import SearchBar from "../SearchBar/SearchBar";
-const utils = require("../Utils/utils");
+import { prepareHeaders } from "../Utils/utils";
 
 require("./ConversationParams.css");
 
@@ -10,20 +10,26 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
 
   const changeConversationPicture = (submitEvent) => {
     submitEvent.preventDefault();
-    const newConversationPicture = submitEvent.target.querySelector("input.newConversationPicture")
-      .files[0];
+    const newConversationPicture = submitEvent.target.querySelector("input.newConversationPicture").files[0];
     const formData = new FormData();
     formData.append("image", newConversationPicture);
     formData.append("convId", convId);
     axios
-      .post(
-        "http://localhost:3001/conversation/changeConversationPicture",
-        formData,
-        utils.prepareHeaders(document.cookie, "multipart/form-data")
-      )
+      .post("http://localhost:3001/conversation/changeConversationPicture", formData, prepareHeaders(document.cookie, "multipart/form-data"))
       .then((changePictureResponse) => {
         setIsPictureChanged(true);
         console.log(changePictureResponse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const leaveConversation = (conversationId) => (clickEvent) => {
+    axios
+      .put("http://localhost:3001/conversation/leaveConversation", { conversationId: conversationId }, prepareHeaders(document.cookie))
+      .then((leaveResponse) => {
+        console.log(leaveResponse);
       })
       .catch((error) => {
         console.log(error);
@@ -33,13 +39,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
     <div className="conversationParams">
       <div className="paramsHeader">
         <ProfilePicture imageUrl={conversation.imageUrl} />
-        <p>
-          {conversation.name ? (
-            <span> conversation.name</span>
-          ) : (
-            conversation.Users.map((user, key) => <span key={key}>{user.username}</span>)
-          )}
-        </p>
+        <p>{conversation.name ? <span> conversation.name</span> : conversation.Users.map((user, key) => <span key={key}>{user.username}</span>)}</p>
       </div>
       <div className="paramsBody">
         <fieldset>
@@ -53,7 +53,9 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
             <input type="submit" />
           </form>
         </fieldset>
-        <button className="deleteConv">Supprimer la conversation</button>
+        <button className="deleteConv" onClick={leaveConversation(conversation.id)}>
+          Supprimer la conversation
+        </button>
       </div>
     </div>
   );

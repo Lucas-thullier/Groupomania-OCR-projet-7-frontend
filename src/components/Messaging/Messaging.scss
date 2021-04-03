@@ -32,5 +32,11 @@
   .chatBodyPlaceholder {
     justify-content: center;
     align-items: center;
+    // transform: translateX(2000px);
+    // transition: transform 500ms ease-in-out;
+    .placeholderText {
+      // transform: translateY(2000px);
+      // transition: transform 400ms ease-in-out 250ms;
+    }
   }
 }

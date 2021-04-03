@@ -1,7 +1,9 @@
-.contactPanel {
+.conversationsPanel {
   display: flex;
   flex-direction: column;
   flex: 0.15 1;
+  // transform: translateX(-500px);
+  // transition: transform 500ms ease-in-out;
   .contact {
     margin: 0;
     padding: 0;

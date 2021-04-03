@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 
 import { Route, Redirect } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/checkIfLogged", utils.prepareHeaders(document.cookie))
+      .get("http://localhost:3001/checkIfLogged", prepareHeaders(document.cookie))
       .then((response) => {
         if (response.status === 200) {
           setRequestDone(true);

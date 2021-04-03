@@ -2,11 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfilePicture from "../ProfilPicture/ProfilPicture";
 import SearchBar from "../SearchBar/SearchBar";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 import Modal from "../Modal/Modal";
 import ConversationParams from "../ConversationParams/ConversationParams";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 require("./ChatHeader.css");
 
+const settingsElement = <FontAwesomeIcon icon={faCog} />;
 const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPictureChanged }) => {
   const [selectedConversation, setSelectedConversation] = useState(singleConversation);
   const [isModalActive, setIsModalActive] = useState(false);
@@ -20,41 +23,28 @@ const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPicture
   };
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`,
-        utils.prepareHeaders(document.cookie)
-      )
-      .then((singleConv) => {
-        setSelectedConversation(singleConv.data);
-      });
+    axios.get(`http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`, prepareHeaders(document.cookie)).then((singleConv) => {
+      setSelectedConversation(singleConv.data);
+    });
   }, [isPictureChanged]);
 
   if (selectedConversation) {
     return (
       <div className="chatHeader">
-        <div className="conversationInfo">
-          {/* <p>{conversationName}</p> */}
-          <div>
-            {selectedConversation.name
-              ? selectedConversation.name
-              : selectedConversation.Users.map((user, key) => <div key={key}>{user.username}</div>)}
-          </div>
-          <button onClick={showModal}>bouton</button>
-          <Modal show={isModalActive} handleClose={hideModal}>
-            {isModalActive ? (
-              <ConversationParams
-                conversation={selectedConversation}
-                convId={selectedConversation.id}
-                setIsPictureChanged={setIsPictureChanged}
-                isPictureChanged={isPictureChanged}
-              />
-            ) : (
-              <></>
-            )}
-          </Modal>
+        <div className="conversationInfos">
+          <ProfilePicture imageUrl={selectedConversation.imageUrl} />
+          <div className="conversationName">{selectedConversation.name ? selectedConversation.name : selectedConversation.Users.map((user, key) => <span key={key}>{`${user.username} `}</span>)}</div>
         </div>
-        <ProfilePicture imageUrl={selectedConversation.imageUrl} />
+        <div className="conversationsActions">
+          <button onClick={showModal}>{settingsElement}</button>
+        </div>
+        <Modal show={isModalActive} handleClose={hideModal}>
+          {isModalActive ? (
+            <ConversationParams conversation={selectedConversation} convId={selectedConversation.id} setIsPictureChanged={setIsPictureChanged} isPictureChanged={isPictureChanged} />
+          ) : (
+            <></>
+          )}
+        </Modal>
       </div>
     );
   }

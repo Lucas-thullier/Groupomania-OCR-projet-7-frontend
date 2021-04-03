@@ -5,7 +5,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 import axios from "axios";
 
 const PaperPlaneElement = <FontAwesomeIcon icon={faPaperPlane} />;
@@ -28,11 +28,7 @@ const PostReaction = ({ userId, convId, setIsMessageSend }) => {
         convId: convId,
       });
       axios
-        .post(
-          "http://localhost:3001/messages/newMessage",
-          messageToSend,
-          utils.prepareHeaders(document.cookie)
-        )
+        .post("http://localhost:3001/messages/newMessage", messageToSend, prepareHeaders(document.cookie))
         .then((response) => {
           if (response.data.message === "true") {
             setIsMessageSend(true);
@@ -49,22 +45,15 @@ const PostReaction = ({ userId, convId, setIsMessageSend }) => {
   };
   return (
     <div className="postReaction">
-      <ul>
-        <li> {shareElement} </li>
-        <li> {gifElement} </li>
-        <li> {smileElement} </li>
-      </ul>
+      <div className="shareElement"> {shareElement} </div>
       <form method="POST" onSubmit={handleSubmit}>
-        <input
-          autoComplete="off"
-          id="sendResponse"
-          type="text"
-          name="sendResponse"
-          placeholder="Encore une super journée..."
-          onChange={onMessageChange}
-        />
+        <input autoComplete="off" id="sendResponse" type="text" name="sendResponse" placeholder="Encore une super journée..." onChange={onMessageChange} />
         <button> {PaperPlaneElement} </button>
       </form>
+      <ul>
+        <li> {smileElement} </li>
+        <li> {gifElement} </li>
+      </ul>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import axios from "axios";
 import UserSearchPreview from "../UserSearchPreview/UserSearchPreview";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 const searchElement = <FontAwesomeIcon icon={faSearch} />;
 
 const SearchBar = ({ searchFor, setIsNewConversation }) => {
@@ -21,8 +21,9 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
         setIsSearchBarEmpty(true);
       }
 
+      const searchUrl = `http://localhost:3001/user/searchUser?searchContent=${searchContent}`;
       axios
-        .get(searchUrl, utils.prepareHeaders(document.cookie))
+        .get(searchUrl, prepareHeaders(document.cookie))
         .then((searchResponse) => {
           setSearchResult(searchResponse.data);
         })
@@ -50,7 +51,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
     setIsSearchBarFocused(false);
     if (blurEvent) {
       setTimeout(() => {
-        setSearchResult(null);
+        setSearchResult(null); // TODO remettre cette ligne
         clearSearchBar();
       }, 200);
     }
@@ -59,29 +60,10 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
     setSearchContent(messageChangeEvent.target.value);
   };
 
-  let searchUrl;
-  switch (searchFor) {
-    case "users":
-      searchUrl = `http://localhost:3001/user/searchUser?searchContent=${searchContent}`;
-      break;
-    case "friends":
-      const userId = localStorage.getItem("userId");
-      searchUrl = `http://localhost:3001/user/searchFriendUsers?searchContent=${searchContent}&userId=${userId}`;
-      break;
-    default:
-      break;
-  }
-
   return (
     <div className="searchWrapper">
       <div className="searchBar">
-        <input
-          className="searchBarInput"
-          type="text"
-          onChange={onSearchChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
+        <input className="searchBarInput" type="text" onChange={onSearchChange} onFocus={handleFocus} onBlur={handleBlur} />
         <button> {searchElement} </button>
         <UserSearchPreview
           setIsNewConversation={setIsNewConversation}

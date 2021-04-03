@@ -1,4 +1,4 @@
-nav {
+.mainNavbar {
   background-color: rgba(255, 255, 255, 0.05);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -15,7 +15,7 @@ nav {
           align-items: center;
 }
 
-nav ul {
+.mainNavbar ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -29,16 +29,16 @@ nav ul {
   font-size: 1.3rem;
 }
 
-nav ul li {
+.mainNavbar ul li {
   margin: 0 0.5rem;
 }
 
-nav ul .signout {
+.mainNavbar ul .signout {
   margin-left: 1rem;
   cursor: pointer;
 }
 
-nav a {
+.mainNavbar a {
   color: white;
 }
 /*# sourceMappingURL=Navbar.css.map */

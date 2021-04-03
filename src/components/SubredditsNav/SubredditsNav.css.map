@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,QAAQ,EAAE,QAAQ;EAClB,OAAO,EAAE,EAAE;CAUZ;;AAZD,AAKE,cALY,CAKZ,gBAAgB,CAAC;EACf,MAAM,EAAE,OAAO;EACf,OAAO,EAAE,MAAM;CAIhB;;AAXH,AAQI,cARU,CAKZ,gBAAgB,AAGb,MAAM,CAAC;EACN,gBAAgB,EAAE,yBAAyB;CAC5C",
+    "sources": [
+        "SubredditsNav.scss"
+    ],
+    "names": [],
+    "file": "SubredditsNav.css"
+}

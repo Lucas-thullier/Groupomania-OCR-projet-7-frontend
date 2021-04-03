@@ -1,24 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 import Modal from "../Modal/Modal";
-import Subreddit from "../Subreddit/Subreddit";
+import Submission from "../Submission/Submission";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReddit } from "@fortawesome/free-brands-svg-icons";
+import SubredditsNav from "../SubredditsNav/SubredditsNav";
+import SubmissionsFlow from "../SubmissionsFlow/SubmissionsFlow";
 require("./Reddit.css");
 
+const redditElement = <FontAwesomeIcon icon={faReddit} className="redditLoaderIcon" />;
 const Reddit = () => {
-  const [hotSubreddits, setHotSubreddits] = useState(null);
+  const [submissionsList, setSubmissionsList] = useState(null);
   const [isModalActive, setIsModalActive] = useState(false);
   const [submission, setSubmission] = useState(null);
+  const [subredditsList, setSubredditsList] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(
-        "http://localhost:3001/reddit/getHotSubreddits",
-        utils.prepareHeaders(document.prepareHeaders)
-      )
-      .then((hotSubredditsResponse) => {
-        setHotSubreddits(hotSubredditsResponse.data);
-      });
+    axios.get("http://localhost:3001/reddit/getHotSubreddits", prepareHeaders(document.prepareHeaders)).then((submissionsListResponse) => {
+      setSubmissionsList(submissionsListResponse.data);
+    });
   }, []);
 
   const showModal = (submission) => (clickEvent) => {
@@ -30,36 +31,44 @@ const Reddit = () => {
     setIsModalActive(false);
   };
 
-  const stopPropagation = (clickEvent) => {
-    clickEvent.stopPropagation();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/reddit/getPopularSubreddits", prepareHeaders(document.cookie))
+      .then((popularSubreddit) => {
+        setSubredditsList(popularSubreddit.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const embedContent = (embedContent) => {
+    if (!embedContent) {
+      return <></>;
+    } else if (embedContent.reddit_video_preview) {
+      return (
+        <video width="320" height="320" controls>
+          <source src={embedContent.reddit_video_preview.fallback_url} />
+        </video>
+      );
+    } else if (embedContent.images) {
+      return (
+        <div className="divImg">
+          <img src={embedContent.images[0].source.url} />
+        </div>
+      );
+    }
   };
 
-  if (hotSubreddits) {
-    return (
-      <main className="redditFlow">
-        {hotSubreddits.map((singleSubreddit, key) => (
-          <div className="singleSubreddit" key={key} onClick={showModal(singleSubreddit)}>
-            <p className="submissionTitle">
-              <a href={singleSubreddit.url} onClick={stopPropagation} target="_blank">
-                {singleSubreddit.title}
-              </a>
-            </p>
-            <p id="subredditAuthor">{singleSubreddit.author}</p>
-            {singleSubreddit.imageUrl.match(/(.jpg$)|(.png$)/) ? (
-              <img src={singleSubreddit.imageUrl} />
-            ) : (
-              <></>
-            )}
-          </div>
-        ))}
-        <Modal show={isModalActive} handleClose={hideModal}>
-          {isModalActive ? <Subreddit submission={submission} /> : <></>}
-        </Modal>
-      </main>
-    );
-  } else {
-    return <div>Reddit</div>;
-  }
+  return (
+    <main className="redditFlow">
+      {subredditsList ? <SubredditsNav subredditsList={subredditsList} setSubmissionsList={setSubmissionsList} /> : <></>}
+      {submissionsList ? <SubmissionsFlow submissionsList={submissionsList} embedContent={embedContent} showModal={showModal} /> : <div className="redditLoader">{redditElement}</div>}
+      <Modal show={isModalActive} handleClose={hideModal}>
+        {isModalActive ? <Submission submission={submission} embedContent={embedContent} /> : <></>}
+      </Modal>
+    </main>
+  );
 };
 
 export default Reddit;

@@ -7,6 +7,12 @@
       -ms-flex-direction: column;
           flex-direction: column;
   overflow-y: auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .messagesFlow .oneMessage {
@@ -19,19 +25,32 @@
           flex-direction: row;
 }
 
+.messagesFlow .oneMessage img {
+  -webkit-box-flex: 0.07;
+      -ms-flex: 0.07;
+          flex: 0.07;
+  min-width: 6vw;
+  width: 3rem;
+  height: 3rem;
+  place-self: start;
+}
+
 .messagesFlow .oneMessage:hover {
   background-color: rgba(18, 18, 18, 0.1);
 }
 
-.messagesFlow .oneMessage.self {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
+.messagesFlow .oneMessage .textContent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.messagesFlow .oneMessage.self .textContent {
-  text-align: right;
+.messagesFlow .oneMessage .textContent p {
+  margin: 0.2rem 0;
 }
 
 .messagesFlow .profilPicture {

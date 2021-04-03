@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./FriendList.css";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
 import ProfilePicture from "../ProfilPicture/ProfilPicture";
 
 const FriendList = () => {
   const [friendList, setFriendList] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/user/getFriendsByUserId", utils.prepareHeaders(document.cookie))
+      .get("http://localhost:3001/user/getFriendsByUserId", prepareHeaders(document.cookie))
       .then((friendsResponse) => {
         setFriendList(friendsResponse.data);
       })

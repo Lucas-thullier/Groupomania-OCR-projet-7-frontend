@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "Subreddit.scss"
+        "ChatPlaceholder.scss"
     ],
     "names": [],
-    "file": "Subreddit.css"
+    "file": "ChatPlaceholder.css"
 }

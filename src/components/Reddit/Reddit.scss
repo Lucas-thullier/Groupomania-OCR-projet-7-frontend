@@ -1,24 +1,48 @@
 .redditFlow {
   flex: 1;
-  .singleSubreddit {
-    background-color: rgba(255, 255, 255, 0.05);
+  display: flex;
+  .popularSubreddits {
+    position: absolute;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    margin: 2rem 2rem;
-    #subredditAuthor {
-      align-self: flex-end;
+
+    :hover {
+      background-color: rgba(255, 255, 255, 0.1);
     }
-  }
-  img {
-    width: 40%;
-    height: 50%;
-    object-fit: cover;
+    .singleSubreddit {
+      padding: 0.2rem 0;
+    }
   }
 
   .submissionTitle {
+    flex: 1;
+    margin: 0;
+    padding: 1rem;
     a {
       color: white;
       text-decoration: none;
     }
+  }
+}
+
+.redditLoader {
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.redditLoaderIcon {
+  width: 5rem;
+  font-size: 20rem;
+  animation: redditLoading 2s infinite;
+}
+
+@keyframes redditLoading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

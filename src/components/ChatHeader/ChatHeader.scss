@@ -1,7 +1,28 @@
 .chatHeader {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  .conversationInfos {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    img {
+      width: 4rem;
+      height: 4rem;
+      min-width: 6vw;
+      flex: 0.07;
+    }
+
+    .conversationName {
+      flex: 1;
+    }
+  }
+  .conversationActions {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
   .profilPicture {
     width: 75px;
     height: 75px;

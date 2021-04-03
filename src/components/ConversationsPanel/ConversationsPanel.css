@@ -1,4 +1,4 @@
-.contactPanel {
+.conversationsPanel {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,17 +11,17 @@
           flex: 0.15 1;
 }
 
-.contactPanel .contact {
+.conversationsPanel .contact {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.contactPanel .contact .test {
+.conversationsPanel .contact .test {
   display: block;
 }
 
-.contactPanel .contact li {
+.conversationsPanel .contact li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,18 +32,18 @@
   place-items: center;
 }
 
-.contactPanel .contact li .profilPicture {
+.conversationsPanel .contact li .profilPicture {
   height: 50px;
   width: 50px;
   margin: 0.5rem;
 }
 
-.contactPanel .contact li p {
+.conversationsPanel .contact li p {
   margin: 0.5rem;
 }
 
-.contactPanel .contact li:hover {
+.conversationsPanel .contact li:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.08);
 }
-/*# sourceMappingURL=ConversationsList.css.map */
+/*# sourceMappingURL=ConversationsPanel.css.map */

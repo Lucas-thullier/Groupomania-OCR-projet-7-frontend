@@ -8,8 +8,7 @@ import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../SearchBar/SearchBar";
-const utils = require("../Utils/utils");
-
+import { prepareHeaders, clearAuthCookie } from "../Utils/utils";
 const userElement = <FontAwesomeIcon icon={faUserAlt} />;
 const redditElement = <FontAwesomeIcon icon={faReddit} />;
 const envelopeElement = <FontAwesomeIcon icon={faEnvelope} />;
@@ -21,12 +20,12 @@ const Navbar = () => {
   // const userId = localStorage.getItem("userId");
 
   const disconnect = () => {
-    utils.clearAuthCookie();
+    clearAuthCookie();
     localStorage.clear();
   };
 
   return (
-    <nav>
+    <nav className="mainNavbar">
       <Link to="/">
         <img src={logo} alt="logo groupomania" height="45px" width="100px" />
       </Link>

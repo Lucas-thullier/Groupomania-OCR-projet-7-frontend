@@ -2,18 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfilPicture from "../ProfilPicture/ProfilPicture";
 import axios from "axios";
-import utils from "../Utils/utils";
+import { prepareHeaders } from "../Utils/utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 require("./UserSearchPreview.css");
 
-const UserSearchPreview = ({
-  searchResult,
-  isSearchBarBlured,
-  isSearchBarFocused,
-  isSearchBarEmpty,
-  clearSearchBar,
-  searchFor,
-  setIsNewConversation,
-}) => {
+const UserSearchPreview = ({ searchResult, isSearchBarBlured, isSearchBarFocused, isSearchBarEmpty, clearSearchBar, searchFor, setIsNewConversation }) => {
+  const friendStatut = (isAlreadyFriend) => (
+    <span className="fa-layers fa-fw" id="userStatut">
+      <FontAwesomeIcon icon={faUserFriends} className="friendshipLogo" />
+
+      <FontAwesomeIcon icon={isAlreadyFriend ? faCheck : faPlus} transform="shrink-4" className="friendshipCheck" />
+    </span>
+  );
+
   function createConversation(userId, friendId) {
     let dataForNewConversation = {
       userId: userId,
@@ -21,11 +25,7 @@ const UserSearchPreview = ({
     };
     dataForNewConversation = JSON.stringify(dataForNewConversation);
     axios
-      .post(
-        "http://localhost:3001/conversation/createConversation",
-        dataForNewConversation,
-        utils.prepareHeaders(document.cookie)
-      )
+      .post("http://localhost:3001/conversation/createConversation", dataForNewConversation, prepareHeaders(document.cookie))
       .then(() => {
         setIsNewConversation(true);
       })
@@ -35,26 +35,12 @@ const UserSearchPreview = ({
   }
 
   function actionOnPreviewClick(singleSearchResult) {
-    switch (searchFor) {
-      case "users":
-        return (
-          <Link to={`/userPage/${singleSearchResult.id}`}>
-            <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
-            <span>{singleSearchResult.username}</span>
-          </Link>
-        );
-      case "friends":
-        const userId = localStorage.getItem("userId");
-        const friendId = singleSearchResult.id;
-        return (
-          <div onClick={() => createConversation(userId, friendId)}>
-            <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
-            <span>{singleSearchResult.username}</span>
-          </div>
-        );
-      default:
-        break;
-    }
+    return (
+      <Link to={`/userPage/${singleSearchResult.id}`}>
+        <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
+        <span>{singleSearchResult.username}</span>
+      </Link>
+    );
   }
 
   if (Array.isArray(searchResult) && searchResult.length != 0) {
@@ -62,7 +48,9 @@ const UserSearchPreview = ({
       <div className="userSearchPreview">
         {searchResult.map((singleSearchResult, key) => (
           <div className="singleUserSearchPreview" key={key} onClick={clearSearchBar}>
-            {actionOnPreviewClick(singleSearchResult)}
+            <ProfilPicture imageUrl={singleSearchResult.imageUrl} />
+            <div className="previewUsername">{singleSearchResult.username}</div>
+            <div className="friendStatut">{friendStatut(singleSearchResult.isAlreadyFriend)}</div>
           </div>
         ))}
       </div>
