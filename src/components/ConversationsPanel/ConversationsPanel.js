@@ -3,6 +3,10 @@ import ProfilPicture from "../ProfilPicture/ProfilPicture";
 require("./ConversationsPanel.css");
 
 const ConversationsPanel = ({ allConversations, setSelectedConversation }) => {
+  useEffect(() => {
+    document.querySelector(".conversationsPanel").style.transform = "translateX(0)";
+  }, []);
+
   return (
     <aside className="conversationsPanel">
       <ul className="contact">

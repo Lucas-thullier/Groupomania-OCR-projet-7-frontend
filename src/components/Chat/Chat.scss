@@ -1,0 +1,32 @@
+.chat {
+  // transform: translateX(-2000px);
+  // transition: transform 500ms ease-in-out;
+  flex-direction: column;
+  &-enter-active {
+    background-color: red !important;
+  }
+  &-enter {
+    background-color: green !important;
+  }
+  &-enter-done {
+    background-color: green !important;
+  }
+  &-exit {
+    opacity: 1;
+    background-color: yellow !important;
+    transition: transformX(100px);
+  }
+  &-exit-active {
+    background-color: purple !important;
+  }
+  .chatBody {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+.chat,
+.chatBody {
+  background-color: rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex: 1;
+}

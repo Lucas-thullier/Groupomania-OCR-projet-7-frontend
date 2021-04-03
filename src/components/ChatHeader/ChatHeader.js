@@ -10,6 +10,7 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 require("./ChatHeader.css");
 
 const settingsElement = <FontAwesomeIcon icon={faCog} />;
+
 const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPictureChanged }) => {
   const [selectedConversation, setSelectedConversation] = useState(singleConversation);
   const [isModalActive, setIsModalActive] = useState(false);
@@ -23,9 +24,14 @@ const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPicture
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`, prepareHeaders(document.cookie)).then((singleConv) => {
-      setSelectedConversation(singleConv.data);
-    });
+    axios
+      .get(`http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`, prepareHeaders(document.cookie))
+      .then((singleConv) => {
+        setSelectedConversation(singleConv.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [isPictureChanged]);
 
   if (selectedConversation) {
@@ -47,8 +53,9 @@ const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPicture
         </Modal>
       </div>
     );
+  } else {
+    return <div className="chatHeader">Placeholder friend(s) infos</div>;
   }
-  return <div className="chatHeader">Placeholder friend(s) infos</div>;
 };
 
 export default ConversationHeader;

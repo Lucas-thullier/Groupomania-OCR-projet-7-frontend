@@ -9,6 +9,12 @@
   -webkit-box-flex: 0.15;
       -ms-flex: 0.15 1;
           flex: 0.15 1;
+  -webkit-transform: translateX(-700px);
+          transform: translateX(-700px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
 }
 
 .conversationsPanel .contact {

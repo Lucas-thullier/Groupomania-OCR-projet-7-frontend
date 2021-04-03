@@ -1,1 +1,51 @@
-/* No CSS *//*# sourceMappingURL=Chat.css.map */
+.chat {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.chat-enter-active {
+  background-color: red !important;
+}
+
+.chat-enter {
+  background-color: green !important;
+}
+
+.chat-enter-done {
+  background-color: green !important;
+}
+
+.chat-exit {
+  opacity: 1;
+  background-color: yellow !important;
+  -webkit-transition: transformX(100px);
+  transition: transformX(100px);
+}
+
+.chat-exit-active {
+  background-color: purple !important;
+}
+
+.chat .chatBody {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.chat,
+.chatBody {
+  background-color: rgba(255, 255, 255, 0.08);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=Chat.css.map */

@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,gBAAgB,CAAC;EACf,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;EACnB,SAAS,EAAE,kBAAkB;EAC7B,UAAU,EAAE,2BAA2B;EACvC,OAAO,EAAE,IAAI;EACb,IAAI,EAAE,CAAC;EACP,gBAAgB,EAAE,yBAAyB;CAK5C;;AAZD,AAQE,gBARc,CAQd,gBAAgB,CAAC;EACf,SAAS,EAAE,kBAAkB;EAC7B,UAAU,EAAE,iCAAiC;CAC9C",
     "sources": [
         "ChatPlaceholder.scss"
     ],

@@ -19,7 +19,15 @@ const Messaging = () => {
       .catch((e) => {
         console.log(e);
       });
-  });
+  }, []);
+
+  useEffect(() => {
+    if (selectedConversation == null) {
+      // document.querySelector(".chat").style.transform = "translateX(1000px)";
+      // document.querySelector(".chatPlaceholder").style.transform = "translateX(1000px)";
+    } else {
+    }
+  }, [selectedConversation]);
 
   return (
     <main className="messaging">
