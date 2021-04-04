@@ -9,7 +9,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 require("./UserSearchPreview.css");
 
-const UserSearchPreview = ({ searchResult, isSearchBarBlured, isSearchBarFocused, isSearchBarEmpty, clearSearchBar, searchFor, setIsNewConversation }) => {
+const UserSearchPreview = ({ searchResult, clearSearchBar, setIsNewConversation }) => {
   const friendStatut = (isAlreadyFriend) => (
     <span className="fa-layers fa-fw" id="userStatut">
       <FontAwesomeIcon icon={faUserFriends} className="friendshipLogo" />

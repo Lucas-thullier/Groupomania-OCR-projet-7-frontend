@@ -6,7 +6,6 @@ import axios from "axios";
 import { prepareHeaders } from "../Utils/utils";
 
 const SingleComment = ({ comment, setNeedRefresh }) => {
-  console.log(comment.User);
   const deleteComment = (commentId) => (clickEvent) => {
     axios
       .delete(`http://localhost:3001/feedpost/deleteComment?commentId=${commentId}`, prepareHeaders(document.cookie))

@@ -17,19 +17,15 @@ const Reddit = () => {
   const [subredditsList, setSubredditsList] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/reddit/getHotSubreddits", prepareHeaders(document.prepareHeaders)).then((submissionsListResponse) => {
-      setSubmissionsList(submissionsListResponse.data);
-    });
+    axios
+      .get("http://localhost:3001/reddit/getHotSubreddits", prepareHeaders(document.prepareHeaders))
+      .then((submissionsListResponse) => {
+        setSubmissionsList(submissionsListResponse.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-
-  const showModal = (submission) => (clickEvent) => {
-    setSubmission(submission);
-    setIsModalActive(true);
-  };
-
-  const hideModal = () => {
-    setIsModalActive(false);
-  };
 
   useEffect(() => {
     axios
@@ -42,30 +38,25 @@ const Reddit = () => {
       });
   }, []);
 
-  const embedContent = (embedContent) => {
-    if (!embedContent) {
-      return <></>;
-    } else if (embedContent.reddit_video_preview) {
-      return (
-        <video width="320" height="320" controls>
-          <source src={embedContent.reddit_video_preview.fallback_url} />
-        </video>
-      );
-    } else if (embedContent.images) {
-      return (
-        <div className="divImg">
-          <img src={embedContent.images[0].source.url} />
-        </div>
-      );
-    }
+  const showModal = (submission) => {
+    setSubmission(submission);
+    setIsModalActive(true);
+  };
+
+  const hideModal = () => {
+    setIsModalActive(false);
   };
 
   return (
     <main className="redditFlow">
       {subredditsList ? <SubredditsNav subredditsList={subredditsList} setSubmissionsList={setSubmissionsList} /> : <></>}
-      {submissionsList ? <SubmissionsFlow submissionsList={submissionsList} embedContent={embedContent} showModal={showModal} /> : <div className="redditLoader">{redditElement}</div>}
+      {submissionsList ? (
+        <SubmissionsFlow submissionsList={submissionsList} showModal={showModal} />
+      ) : (
+        <div className="redditLoader">{redditElement}</div>
+      )}
       <Modal show={isModalActive} handleClose={hideModal}>
-        {isModalActive ? <Submission submission={submission} embedContent={embedContent} /> : <></>}
+        {isModalActive ? <Submission submission={submission} withComments={true} /> : <></>}
       </Modal>
     </main>
   );

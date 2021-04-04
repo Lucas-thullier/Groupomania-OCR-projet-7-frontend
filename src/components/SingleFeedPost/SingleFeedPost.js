@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 const SingleFeedPost = ({ singlePost }) => {
   const [needRefresh, setNeedRefresh] = useState(null);
+  const [comments, setComments] = useState(null);
 
   const handleSubmit = (messageContent) => (submitEvent) => {
     submitEvent.preventDefault();
@@ -32,6 +33,16 @@ const SingleFeedPost = ({ singlePost }) => {
     }
   };
 
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/feedpost/comments?postId=${singlePost.post.id}`)
+      .then((commentsResponse) => {
+        setNeedRefresh(false);
+        setComments(commentsResponse.data);
+      })
+      .catch((error) => console.log(error));
+  }, [needRefresh]);
+
   return (
     <div className="singleFeedPost">
       <div className="postContent">
@@ -40,7 +51,7 @@ const SingleFeedPost = ({ singlePost }) => {
         <p className="textContent">{singlePost.post.text_content}</p>
       </div>
       <PostReaction handleSubmit={handleSubmit} />
-      <FeedPostComments postId={singlePost.post.id} needRefresh={needRefresh} setNeedRefresh={setNeedRefresh} />
+      {comments ? <FeedPostComments comments={comments} setNeedRefresh={setNeedRefresh} /> : <></>}
     </div>
   );
 };
