@@ -1,31 +1,30 @@
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import PostCreation from "../PostCreation/PostCreation";
+import SingleFeedPost from "../SingleFeedPost/SingleFeedPost";
+import { prepareHeaders } from "../Utils/utils";
 import "./FeedPost.css";
-import PostReaction from "../PostReaction/PostReaction";
-import ProfilPicture from "../ProfilPicture/ProfilPicture";
-import testPicture from "./1.jpg";
 
-class FeedPost extends React.Component {
-  render() {
-    return (
-      <div className="postContainer">
-        <div className="postContent">
-          <ProfilPicture />
-          <p className="username">Sarah</p>
-          <p className="textContent">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-            ultricies sagittis odio. Duis metus enim, tempus a mollis ut, tempus
-            eget justo. Morbi nec lectus nibh. Donec auctor vulputate risus a
-            consectetur. Mauris a interdum velit, a viverra tortor. Morbi
-            efficitur scelerisque augue vitae congue. Vestibulum blandit massa
-            ut porttitor imperdiet. Sed tincidunt dolor vel lectus ornare
-            tristique. Mauris est enim, elementum sit amet mi id, mattis dapibus
-            tellus.
-          </p>
-        </div>
-        <PostReaction />
-      </div>
-    );
-  }
-}
+const FeedPost = () => {
+  const [feedposts, setFeedPosts] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/feedpost/getFeedPost", prepareHeaders(document.cookie))
+      .then((feedPostResponse) => {
+        setFeedPosts(feedPostResponse.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <section className="feedPost">
+      <PostCreation />
+      {feedposts ? feedposts.map((singlePost, key) => <SingleFeedPost singlePost={singlePost} key={key} />) : <></>}
+    </section>
+  );
+};
 
 export default FeedPost;

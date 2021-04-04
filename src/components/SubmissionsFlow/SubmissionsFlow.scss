@@ -8,6 +8,10 @@
     flex-direction: column;
     margin: 2rem 15rem;
     max-height: 60vw;
+    overflow: hidden;
+    .submissionTitle {
+      overflow: hidden;
+    }
     // transition: transform ease-in-out 1000 5000;
     &.even {
       transform: translateX(-2000px);

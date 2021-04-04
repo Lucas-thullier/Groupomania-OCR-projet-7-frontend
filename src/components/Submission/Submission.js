@@ -10,10 +10,16 @@ const Submission = ({ submission, embedContent }) => {
   const [comments, setComments] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/reddit/getCommentsById?submissionId=${submission.submissionId}`, prepareHeaders(document.cookie)).then((commentsResponse) => {
-      setComments(commentsResponse.data);
-    });
+    axios
+      .get(
+        `http://localhost:3001/reddit/getCommentsById?submissionId=${submission.submissionId}`,
+        prepareHeaders(document.cookie)
+      )
+      .then((commentsResponse) => {
+        setComments(commentsResponse.data);
+      });
   }, []);
+
   if (comments) {
     return (
       <div className="modalSubmission">

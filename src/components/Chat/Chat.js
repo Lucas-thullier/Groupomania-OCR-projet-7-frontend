@@ -30,6 +30,30 @@ const Chat = ({ selectedConversation }) => {
     setSwitchConversations(true);
   }, []);
 
+  const handleSubmit = (messageContent) => (submitEvent) => {
+    submitEvent.preventDefault();
+    if (messageContent) {
+      const messageToSend = JSON.stringify({
+        messageContent: messageContent,
+        convId: selectedConversation.id,
+      });
+      axios
+        .post("http://localhost:3001/messages/newMessage", messageToSend, prepareHeaders(document.cookie))
+        .then((response) => {
+          if (response.data.message === "true") {
+            setIsMessageSend(true);
+            setIsMessageSend(false);
+            document.getElementById("sendResponse").value = "";
+          } else {
+            setIsMessageSend(false);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   // useEffect(() => {});
 
   const actualChat = useRef(null);
@@ -58,7 +82,7 @@ const Chat = ({ selectedConversation }) => {
         <ChatHeader setIsPictureChanged={setIsPictureChanged} isPictureChanged={isPictureChanged} singleConversation={selectedConversation} />
         <div className="chatBody">
           {allMessages ? <MessagesFlow allMessages={allMessages} /> : <></>}
-          <PostReaction convId={selectedConversation.id} setIsMessageSend={setIsMessageSend} />
+          <PostReaction convId={selectedConversation.id} setIsMessageSend={setIsMessageSend} handleSubmit={handleSubmit} />
         </div>
       </section>
     </CSSTransition>

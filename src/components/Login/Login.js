@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Redirect, Route, useLocation } from "react-router-dom";
-import Home from "../Home/Home";
 require("./Login.css");
 
 const Login = () => {

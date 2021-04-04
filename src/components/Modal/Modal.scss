@@ -12,10 +12,10 @@
     background-color: rgba(18, 18, 18, 1);
     width: 80%;
     height: 90%;
-    // height: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow: hidden;
 
     max-height: 100vh;
     overflow-y: scroll;

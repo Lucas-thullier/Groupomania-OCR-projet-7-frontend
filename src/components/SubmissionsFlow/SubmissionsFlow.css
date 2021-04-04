@@ -17,6 +17,11 @@
           flex-direction: column;
   margin: 2rem 15rem;
   max-height: 60vw;
+  overflow: hidden;
+}
+
+.submissionsFlow .singlePost .submissionTitle {
+  overflow: hidden;
 }
 
 .submissionsFlow .singlePost.even {

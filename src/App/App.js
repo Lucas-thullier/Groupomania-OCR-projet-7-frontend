@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Login from "../components/Login/Login";
-import Home from "../components/Home/Home";
 import Navbar from "../components/Navbar/Navbar";
 import Messaging from "../components/Messaging/Messaging";
 import Account from "../components/Account/Account";
 import PrivateRoute from "../components/Utils/PrivateRoute";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  useLocation,
-  useHistory,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect, useLocation, useHistory, Switch } from "react-router-dom";
 import UserPage from "../components/UserPage/UserPage";
 import Reddit from "../components/Reddit/Reddit";
+import FeedPost from "../components/FeedPost/FeedPost";
 
 export default function App() {
   return (
@@ -25,7 +17,7 @@ export default function App() {
         <Navbar />
         <Switch>
           <PrivateRoute path="/" exact>
-            <Home />
+            <FeedPost />
           </PrivateRoute>
           <Route path="/login">
             <Login />

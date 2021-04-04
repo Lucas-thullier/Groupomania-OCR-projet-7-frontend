@@ -1,4 +1,8 @@
+import axios from "axios";
 import { useEffect } from "react";
+import GroupoComments from "../GroupoComments/GroupoComments";
+import PostReaction from "../PostReaction/PostReaction";
+import { prepareHeaders } from "../Utils/utils";
 
 require("./SubmissionsFlow.css");
 
@@ -9,6 +13,25 @@ const SubmissionsFlow = ({ submissionsList, embedContent, showModal }) => {
       singlePost.style.transition = "transform 500ms ease-in-out";
     });
   }, []);
+
+  const handleSubmit = (messageContent) => (submitEvent) => {
+    submitEvent.preventDefault();
+    // submitEvent.target[0].value,
+    // submitEvent.target[0]
+    // axios.post
+    const dataToCreateRedditComment = {
+      textContent: messageContent,
+    };
+    axios
+      .post("http://localhost:3001/reddit/createRedditComment", dataToCreateRedditComment, prepareHeaders(document.cookie))
+      .then(() => {
+        console.log("ok");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <section className="submissionsFlow">
       {submissionsList.map((singleSubmission, key) => (
@@ -23,13 +46,12 @@ const SubmissionsFlow = ({ submissionsList, embedContent, showModal }) => {
           <p id="subredditAuthor">
             {singleSubmission.author} in {singleSubmission.subredditNamePrefixed}
           </p>
-          <div className="comments">
-            <div>From reddit</div>
-            <div>From groupomania</div>
-          </div>
+          <PostReaction handleSubmit={handleSubmit} />
+          <GroupoComments />
         </div>
       ))}
     </section>
   );
 };
+
 export default SubmissionsFlow;

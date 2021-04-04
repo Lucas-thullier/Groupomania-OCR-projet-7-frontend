@@ -1,0 +1,16 @@
+.postCreation {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  form {
+    flex: 0.5;
+    display: flex;
+    textarea {
+      resize: none;
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0);
+      color: white;
+    }
+  }
+}
