@@ -36,9 +36,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
   }, [searchContent, isSearchBarFocused]);
 
   const clearSearchBar = () => {
-    document.querySelectorAll(".searchWrapper >.searchBar > .searchBarInput").forEach((element) => {
-      element.value = "";
-    });
+    document.querySelector(".searchWrapper >.searchBar > .searchBarInput").value = "";
   };
 
   const handleFocus = (focusEvent) => {
@@ -68,10 +66,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
         <UserSearchPreview
           setIsNewConversation={setIsNewConversation}
           searchResult={searchResult}
-          isSearchBarFocused={isSearchBarFocused}
-          isSearchBarEmpty={isSearchBarEmpty}
-          clearInput={clearSearchBar}
-          searchFor={searchFor}
+          clearSearchBar={clearSearchBar}
         />
       </div>
     </div>
