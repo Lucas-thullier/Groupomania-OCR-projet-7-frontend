@@ -20,15 +20,12 @@ const Chat = ({ selectedConversation }) => {
       .get(`http://localhost:3001/messages/getMessagesByConvId?convId=${conversationId}`, prepareHeaders(document.cookie))
       .then((allMessages) => {
         setAllMessages(allMessages.data);
+        setSwitchConversations(true);
       })
       .catch((e) => {
         console.log(e);
       });
   }, [isMessageSend, selectedConversation]);
-
-  useEffect(() => {
-    setSwitchConversations(true);
-  }, []);
 
   const handleSubmit = (messageContent) => (submitEvent) => {
     submitEvent.preventDefault();
@@ -54,10 +51,7 @@ const Chat = ({ selectedConversation }) => {
     }
   };
 
-  // useEffect(() => {});
-
   const actualChat = useRef(null);
-
   const deleteOnExit = () => {
     console.log("cc");
     // actualChat.current = document.querySelector(".chat");
@@ -68,24 +62,31 @@ const Chat = ({ selectedConversation }) => {
 
   return (
     // <div>
-    <CSSTransition
-      in={switchConversations}
-      timeout={400}
-      classNames="chat"
-      // unmountOnExit
-      // exit={false}
-      onExit={() => {
-        console.log("cc");
-      }}
-    >
-      <section className="chat">
-        <ChatHeader setIsPictureChanged={setIsPictureChanged} isPictureChanged={isPictureChanged} singleConversation={selectedConversation} />
-        <div className="chatBody">
-          {allMessages ? <MessagesFlow allMessages={allMessages} /> : <></>}
-          <PostReaction convId={selectedConversation.id} setIsMessageSend={setIsMessageSend} handleSubmit={handleSubmit} />
-        </div>
-      </section>
-    </CSSTransition>
+    // <CSSTransition
+    //   in={switchConversations}
+    //   timeout={400}
+    //   classNames="chat"
+    //   // unmountOnExit
+    //   // exit={false}
+    //   onExit={() => {
+    //     console.log("cc");
+    //   }}
+    // >
+    <section className="chat">
+      <ChatHeader
+        setIsPictureChanged={setIsPictureChanged}
+        isPictureChanged={isPictureChanged}
+        singleConversation={selectedConversation}
+        switchConversations={switchConversations}
+        setSwitchConversations={setSwitchConversations}
+      />
+
+      <div className="chatBody">
+        {allMessages ? <MessagesFlow allMessages={allMessages} /> : <></>}
+        <PostReaction convId={selectedConversation.id} setIsMessageSend={setIsMessageSend} handleSubmit={handleSubmit} />
+      </div>
+    </section>
+    // </CSSTransition>
     // </div>
   );
 };

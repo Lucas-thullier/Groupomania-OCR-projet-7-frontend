@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ProfilePicture from "../ProfilPicture/ProfilPicture";
-import SearchBar from "../SearchBar/SearchBar";
 import { prepareHeaders } from "../Utils/utils";
 import Modal from "../Modal/Modal";
 import ConversationParams from "../ConversationParams/ConversationParams";
@@ -11,11 +10,17 @@ require("./ChatHeader.css");
 
 const settingsElement = <FontAwesomeIcon icon={faCog} />;
 
-const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPictureChanged }) => {
+const ConversationHeader = ({
+  singleConversation,
+  setIsPictureChanged,
+  isPictureChanged,
+  switchConversations,
+  setSwitchConversations,
+}) => {
   const [selectedConversation, setSelectedConversation] = useState(singleConversation);
   const [isModalActive, setIsModalActive] = useState(false);
 
-  const showModal = (clickEvent) => {
+  const showModal = () => {
     setIsModalActive(true);
   };
 
@@ -25,37 +30,47 @@ const ConversationHeader = ({ singleConversation, setIsPictureChanged, isPicture
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`, prepareHeaders(document.cookie))
+      .get(
+        `http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`,
+        prepareHeaders(document.cookie)
+      )
       .then((singleConv) => {
         setSelectedConversation(singleConv.data);
+        console.log("cc");
+        setSwitchConversations(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [isPictureChanged]);
+  }, []);
 
-  if (selectedConversation) {
-    return (
-      <div className="chatHeader">
-        <div className="conversationInfos">
-          <ProfilePicture imageUrl={selectedConversation.imageUrl} />
-          <div className="conversationName">{selectedConversation.name ? selectedConversation.name : selectedConversation.Users.map((user, key) => <span key={key}>{`${user.username} `}</span>)}</div>
+  return (
+    <div className="chatHeader">
+      <div className="conversationInfos">
+        <ProfilePicture imageUrl={selectedConversation.imageUrl} />
+        <div className="conversationName">
+          {selectedConversation.name
+            ? selectedConversation.name
+            : selectedConversation.Users.map((user, key) => <span key={key}>{`${user.username} `}</span>)}
         </div>
-        <div className="conversationsActions">
-          <button onClick={showModal}>{settingsElement}</button>
-        </div>
-        <Modal show={isModalActive} handleClose={hideModal}>
-          {isModalActive ? (
-            <ConversationParams conversation={selectedConversation} convId={selectedConversation.id} setIsPictureChanged={setIsPictureChanged} isPictureChanged={isPictureChanged} />
-          ) : (
-            <></>
-          )}
-        </Modal>
       </div>
-    );
-  } else {
-    return <div className="chatHeader">Placeholder friend(s) infos</div>;
-  }
+      <div className="conversationsActions">
+        <button onClick={showModal}>{settingsElement}</button>
+      </div>
+      <Modal show={isModalActive} handleClose={hideModal}>
+        {isModalActive ? (
+          <ConversationParams
+            conversation={selectedConversation}
+            convId={selectedConversation.id}
+            setIsPictureChanged={setIsPictureChanged}
+            isPictureChanged={isPictureChanged}
+          />
+        ) : (
+          <></>
+        )}
+      </Modal>
+    </div>
+  );
 };
 
 export default ConversationHeader;

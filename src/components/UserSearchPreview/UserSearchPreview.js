@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import ProfilPicture from "../ProfilPicture/ProfilPicture";
-import axios from "axios";
-import { prepareHeaders } from "../Utils/utils";
+import React from "react";
 import "./UserSearchPreview.css";
 import SingleUserSearchPreview from "../SingleUserSearchPreview/SingleUserSearchPreview";
 
-const UserSearchPreview = ({ searchResult, clearSearchBar, setIsNewConversation }) => {
+const UserSearchPreview = ({ searchResult }) => {
   if (Array.isArray(searchResult) && searchResult.length != 0) {
     return (
       <div className="userSearchPreview">

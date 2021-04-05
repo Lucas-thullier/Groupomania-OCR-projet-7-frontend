@@ -9,15 +9,36 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 import { prepareHeaders } from "../Utils/utils";
 
-const SingleUserSearchPreview = ({ singleSearchResult, clearSearchBar }) => {
+const SingleUserSearchPreview = ({ singleSearchResult }) => {
   const [isAlreadyFriend, setIsAlreadyFriend] = useState(singleSearchResult.isAlreadyFriend);
   const history = useHistory();
 
-  const handleClick = () => {
+  const handleClickOnContextualButton = (clickEvent) => {
+    clickEvent.stopPropagation();
     if (isAlreadyFriend) {
       createConversation(singleSearchResult.id);
+      axios
+        .get(
+          `http://localhost:3001/conversation/getConversationByUserAndFriendId?friendId=${singleSearchResult.id}`,
+          prepareHeaders(document.cookie)
+        )
+        .then((test) => {
+          history.push({
+            pathname: "/messaging",
+            state: {
+              conversation: test.data,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
-      history.push(`/userPage/${singleSearchResult.id}`);
+      let postData = {
+        newFriendId: singleSearchResult.id,
+      };
+      postData = JSON.stringify(postData);
+      axios.post("http://localhost:3001/user/addFriend", postData, prepareHeaders(document.cookie));
     }
 
     function createConversation(friendId) {
@@ -36,18 +57,17 @@ const SingleUserSearchPreview = ({ singleSearchResult, clearSearchBar }) => {
     }
   };
 
+  const handleClickOnPreview = () => {
+    history.push(`/userPage/${singleSearchResult.id}`);
+  };
+
   return (
-    <div className="singleUserSearchPreview" onClick={clearSearchBar}>
+    <div className="singleUserSearchPreview" onClick={handleClickOnPreview}>
       <ProfilePicture imageUrl={singleSearchResult.imageUrl} />
 
       <div className="previewUsername">{singleSearchResult.username}</div>
 
-      <div
-        className="friendStatut"
-        onClick={() => {
-          handleClick();
-        }}
-      >
+      <div className="friendStatut" onClick={handleClickOnContextualButton}>
         <span className="fa-layers fa-fw" id="userStatut">
           <FontAwesomeIcon icon={faUserFriends} className="friendshipLogo" />
           <FontAwesomeIcon icon={isAlreadyFriend ? faCheck : faPlus} transform="shrink-4" className="friendshipCheck" />
