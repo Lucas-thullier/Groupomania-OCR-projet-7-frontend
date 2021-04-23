@@ -8,11 +8,10 @@ import { CSSTransition } from "react-transition-group";
 
 require("./Chat.css");
 
-const Chat = ({ selectedConversation }) => {
+const Chat = ({ selectedConversation, setSelectedConversation }) => {
   const [allMessages, setAllMessages] = useState(null);
   const [isMessageSend, setIsMessageSend] = useState(null);
   const [isPictureChanged, setIsPictureChanged] = useState(null);
-  const [switchConversations, setSwitchConversations] = useState(false);
 
   useEffect(() => {
     const conversationId = selectedConversation.id;
@@ -20,7 +19,6 @@ const Chat = ({ selectedConversation }) => {
       .get(`http://localhost:3001/messages/getMessagesByConvId?convId=${conversationId}`, prepareHeaders(document.cookie))
       .then((allMessages) => {
         setAllMessages(allMessages.data);
-        setSwitchConversations(true);
       })
       .catch((e) => {
         console.log(e);
@@ -39,7 +37,6 @@ const Chat = ({ selectedConversation }) => {
         .then((response) => {
           if (response.data.message === "true") {
             setIsMessageSend(true);
-            setIsMessageSend(false);
             document.getElementById("sendResponse").value = "";
           } else {
             setIsMessageSend(false);
@@ -51,34 +48,13 @@ const Chat = ({ selectedConversation }) => {
     }
   };
 
-  const actualChat = useRef(null);
-  const deleteOnExit = () => {
-    console.log("cc");
-    // actualChat.current = document.querySelector(".chat");
-    console.log(actualChat);
-    actualChat.current.remove();
-    // setSwitchConversations(false);
-  };
-
   return (
-    // <div>
-    // <CSSTransition
-    //   in={switchConversations}
-    //   timeout={400}
-    //   classNames="chat"
-    //   // unmountOnExit
-    //   // exit={false}
-    //   onExit={() => {
-    //     console.log("cc");
-    //   }}
-    // >
     <section className="chat">
       <ChatHeader
         setIsPictureChanged={setIsPictureChanged}
         isPictureChanged={isPictureChanged}
-        singleConversation={selectedConversation}
-        switchConversations={switchConversations}
-        setSwitchConversations={setSwitchConversations}
+        selectedConversation={selectedConversation}
+        setSelectedConversation={setSelectedConversation}
       />
 
       <div className="chatBody">
@@ -86,8 +62,6 @@ const Chat = ({ selectedConversation }) => {
         <PostReaction convId={selectedConversation.id} setIsMessageSend={setIsMessageSend} handleSubmit={handleSubmit} />
       </div>
     </section>
-    // </CSSTransition>
-    // </div>
   );
 };
 

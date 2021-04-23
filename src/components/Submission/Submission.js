@@ -5,6 +5,7 @@ import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { prepareHeaders } from "../Utils/utils";
 import PostReaction from "../PostReaction/PostReaction";
 import FeedPostComments from "../FeedPostComments/FeedPostComments";
+import CommentsTypeToggler from "../CommentsTypeToggler/CommentsTypeToggler";
 const redditElement = <FontAwesomeIcon icon={faReddit} className="redditLoaderIcon" />;
 require("./Submission.css");
 
@@ -58,35 +59,36 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
     }
   }
 
-  if (submission) {
-    return (
-      <>
-        <div
-          className="singlePost"
-          onClick={() => {
-            showModal(submission);
-          }}
-        >
-          <div className="submissionTitle">
-            <a href={submission.url} onClick={(clickEvent) => clickEvent.stopPropagation()} target="_blank">
-              {submission.title}
-            </a>
-            {submission.textContent ? <p>{submission.textContent}</p> : <></>}
-          </div>
-
-          {embedContent(submission.preview)}
-
-          <p id="submissionAuthor">
-            {submission.author} in {submission.subredditNamePrefixed}
-          </p>
-          {withPostReaction ? <PostReaction handleSubmit={handleSubmit} /> : <></>}
+  return (
+    <>
+      <div
+        className="singlePost"
+        onClick={() => {
+          showModal(submission);
+        }}
+      >
+        <div className="submissionTitle">
+          <a href={submission.url} onClick={(clickEvent) => clickEvent.stopPropagation()} target="_blank">
+            {submission.title}
+          </a>
+          {submission.textContent ? <p>{submission.textContent}</p> : <></>}
         </div>
 
-        {withComments && comments ? <FeedPostComments comments={comments} /> : <></>}
-      </>
-    );
-  } else {
-    return <></>;
-  }
+        {embedContent(submission.preview)}
+
+        <p id="submissionAuthor">
+          {submission.author} in {submission.subredditNamePrefixed}
+        </p>
+        {withPostReaction ? <PostReaction handleSubmit={handleSubmit} /> : <></>}
+      </div>
+
+      {withComments && comments ? <CommentsTypeToggler /> : <></>}
+      {withComments && comments ? (
+        Object.keys(comments).map((comment, key) => <FeedPostComments key={key} comments={comments[comment]} />)
+      ) : (
+        <></>
+      )}
+    </>
+  );
 };
 export default Submission;

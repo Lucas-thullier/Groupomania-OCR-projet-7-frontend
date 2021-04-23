@@ -11,6 +11,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
     const formData = new FormData();
     formData.append("image", newConversationPicture);
     formData.append("convId", convId);
+
     axios
       .post(
         "http://localhost:3001/conversation/changeConversationPicture",
@@ -39,6 +40,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
         console.log(error);
       });
   };
+
   return (
     <div className="conversationParams">
       <div className="paramsHeader">
@@ -47,7 +49,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
           {conversation.name ? (
             <span> conversation.name</span>
           ) : (
-            conversation.Users.map((user, key) => <span key={key}>{user.username}</span>)
+            conversation.Users.map((user, key) => <span key={key}>{user.username} </span>)
           )}
         </p>
       </div>

@@ -29,14 +29,6 @@ const Messaging = () => {
       });
   }, []);
 
-  useEffect(() => {
-    if (selectedConversation == null) {
-      // document.querySelector(".chat").style.transform = "translateX(1000px)";
-      // document.querySelector(".chatPlaceholder").style.transform = "translateX(1000px)";
-    } else {
-    }
-  }, [selectedConversation]);
-
   return (
     <main className="messaging">
       {allConversations ? (
@@ -44,7 +36,11 @@ const Messaging = () => {
       ) : (
         <></>
       )}
-      {selectedConversation ? <Chat selectedConversation={selectedConversation} /> : <ChatPlaceholder />}
+      {selectedConversation ? (
+        <Chat selectedConversation={selectedConversation} setSelectedConversation={setSelectedConversation} />
+      ) : (
+        <ChatPlaceholder />
+      )}
     </main>
   );
 };

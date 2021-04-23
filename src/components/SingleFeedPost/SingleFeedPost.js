@@ -15,7 +15,7 @@ const SingleFeedPost = ({ singlePost }) => {
     if (messageContent) {
       const messageToSend = JSON.stringify({
         messageContent: messageContent,
-        postId: singlePost.post.id,
+        postId: singlePost.id,
       });
       axios
         .post("http://localhost:3001/feedpost/newComment", messageToSend, prepareHeaders(document.cookie))
@@ -35,7 +35,7 @@ const SingleFeedPost = ({ singlePost }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/feedpost/comments?postId=${singlePost.post.id}`)
+      .get(`http://localhost:3001/feedpost/comments?postId=${singlePost.id}`)
       .then((commentsResponse) => {
         setNeedRefresh(false);
         setComments(commentsResponse.data);
@@ -46,9 +46,9 @@ const SingleFeedPost = ({ singlePost }) => {
   return (
     <div className="singleFeedPost">
       <div className="postContent">
-        <ProfilPicture imageUrl={singlePost.friend.imageUrl} />
-        <p className="username">{singlePost.friend.username}</p>
-        <p className="textContent">{singlePost.post.text_content}</p>
+        <ProfilPicture imageUrl={singlePost.User.imageUrl} />
+        <p className="username">{singlePost.User.username}</p>
+        <p className="textContent">{singlePost.text_content}</p>
       </div>
       <PostReaction handleSubmit={handleSubmit} />
       {comments ? <FeedPostComments comments={comments} setNeedRefresh={setNeedRefresh} /> : <></>}

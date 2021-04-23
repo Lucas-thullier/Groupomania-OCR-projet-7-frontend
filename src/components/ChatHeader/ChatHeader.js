@@ -8,16 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 require("./ChatHeader.css");
 
-const settingsElement = <FontAwesomeIcon icon={faCog} />;
-
-const ConversationHeader = ({
-  singleConversation,
-  setIsPictureChanged,
-  isPictureChanged,
-  switchConversations,
-  setSwitchConversations,
-}) => {
-  const [selectedConversation, setSelectedConversation] = useState(singleConversation);
+const ConversationHeader = ({ selectedConversation, setSelectedConversation, setIsPictureChanged, isPictureChanged }) => {
   const [isModalActive, setIsModalActive] = useState(false);
 
   const showModal = () => {
@@ -36,8 +27,6 @@ const ConversationHeader = ({
       )
       .then((singleConv) => {
         setSelectedConversation(singleConv.data);
-        console.log("cc");
-        setSwitchConversations(false);
       })
       .catch((error) => {
         console.log(error);
@@ -55,7 +44,9 @@ const ConversationHeader = ({
         </div>
       </div>
       <div className="conversationsActions">
-        <button onClick={showModal}>{settingsElement}</button>
+        <button onClick={showModal}>
+          <FontAwesomeIcon icon={faCog} />
+        </button>
       </div>
       <Modal show={isModalActive} handleClose={hideModal}>
         {isModalActive ? (
