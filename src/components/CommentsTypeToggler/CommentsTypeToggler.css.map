@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,oBAAoB,CAAC;EACnB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;CAOpB;;AATD,AAGE,oBAHkB,CAGlB,MAAM,CAAC;EACL,IAAI,EAAE,GAAG;EACT,gBAAgB,EAAE,yBAAyB;EAC3C,YAAY,EAAE,sBAAsB;EACpC,KAAK,EAAE,KAAK;CACb",
-    "sources": [
-        "CommentsTypeToggler.scss"
-    ],
-    "names": [],
-    "file": "CommentsTypeToggler.css"
-}

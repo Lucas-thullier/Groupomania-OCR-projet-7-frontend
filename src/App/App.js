@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, useLocation, useHistory
 import UserPage from "../components/UserPage/UserPage";
 import Reddit from "../components/Reddit/Reddit";
 import FeedPost from "../components/FeedPost/FeedPost";
+require("dotenv").config();
 
 export default function App() {
   return (

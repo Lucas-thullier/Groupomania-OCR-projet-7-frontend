@@ -21,7 +21,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
         setIsSearchBarEmpty(true);
       }
 
-      const searchUrl = `http://localhost:3001/user/searchUser?searchContent=${searchContent}`;
+      const searchUrl = `${process.env.REACT_APP_BACKEND_URL}/user/search?searchContent=${searchContent}`;
       axios
         .get(searchUrl, prepareHeaders(document.cookie))
         .then((searchResponse) => {
@@ -49,7 +49,7 @@ const SearchBar = ({ searchFor, setIsNewConversation }) => {
     setIsSearchBarFocused(false);
     if (blurEvent) {
       setTimeout(() => {
-        setSearchResult(null); // TODO remettre cette ligne
+        setSearchResult(null);
         clearSearchBar();
       }, 200);
     }

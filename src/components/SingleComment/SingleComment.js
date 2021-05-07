@@ -8,7 +8,10 @@ import { prepareHeaders } from "../Utils/utils";
 const SingleComment = ({ comment, setNeedRefresh }) => {
   const deleteComment = (commentId) => (clickEvent) => {
     axios
-      .delete(`http://localhost:3001/feedpost/deleteComment?commentId=${commentId}`, prepareHeaders(document.cookie))
+      .delete(
+        `${process.env.REACT_APP_BACKEND_URL}/feedpost/comment/delete?commentId=${commentId}`,
+        prepareHeaders(document.cookie)
+      )
       .then((deletionResponse) => {
         setNeedRefresh(true);
       })
@@ -22,7 +25,7 @@ const SingleComment = ({ comment, setNeedRefresh }) => {
       <ProfilePicture imageUrl={comment.User.imageUrl} />
       <div className="commentData">
         <p className="commentUsername">{comment.User.username}</p>
-        <p className="commentTextcontent">{comment.text_content}</p>
+        <p className="commentTextcontent">{comment.textContent}</p>
       </div>
       <FontAwesomeIcon icon={faTimes} className="deletionCross" onClick={deleteComment(comment.id)} />
     </div>

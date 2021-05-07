@@ -19,30 +19,6 @@ const PostReaction = ({ handleSubmit }) => {
     setMessageContent(messageChangeEvent.target.value);
   };
 
-  // const toggleEmojiPicker = () => {
-  //   const emojiPicker = document.querySelector(".emoji-picker-react");
-  //   if (emojiPicker.style.display === "block") {
-  //     emojiPicker.style.display = "none";
-  //   } else {
-  //     emojiPicker.style.display = "block";
-  //   }
-  // };
-
-  // const pickerStyle = {
-  //   position: "absolute",
-  //   bottom: "5%",
-  //   right: "4%",
-  //   backgroundColor: "rgba(255, 255, 255, 0.08)",
-  //   boxShadow: "none",
-  //   border: "none",
-  //   display: "none",
-  // };
-
-  // const handleEmojiPickerClick = (clickEvent, emojiObject) => {
-  //   console.log(emojiObject);
-  //   document.querySelector("#sendResponse").value += emojiObject.emoji;
-  // };
-
   return (
     <div className="postReaction" onClick={(clickEvent) => clickEvent.stopPropagation()}>
       <div className="shareElement"> {shareElement} </div>
@@ -58,10 +34,7 @@ const PostReaction = ({ handleSubmit }) => {
         <button> {PaperPlaneElement} </button>
       </form>
       <ul>
-        <li>
-          {/* <Picker pickerStyle={pickerStyle} disableSearchBar={true} onEmojiClick={handleEmojiPickerClick} /> */}
-          {smileElement}
-        </li>
+        <li>{smileElement}</li>
         <li> {gifElement} </li>
       </ul>
     </div>

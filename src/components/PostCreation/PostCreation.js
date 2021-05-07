@@ -8,11 +8,11 @@ const PostCreation = ({ setIsNewPost }) => {
 
     const dataForCreateNewPost = {
       textContent: submitEvent.target[0].value,
-      //todo mettre pour photos
     };
 
+    console.log(dataForCreateNewPost);
     axios
-      .post("http://localhost:3001/feedpost/createFeedPost", dataForCreateNewPost, prepareHeaders(document.cookie))
+      .post(`${process.env.REACT_APP_BACKEND_URL}/feedpost/create`, dataForCreateNewPost, prepareHeaders(document.cookie))
       .then((creationResponse) => {
         if (creationResponse.status === 200) {
           setIsNewPost(true);

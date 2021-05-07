@@ -12,9 +12,9 @@ const FriendList = ({ userId }) => {
   useEffect(() => {
     let queryUrl;
     if (userId) {
-      queryUrl = `http://localhost:3001/user/getFriendsByUserId?userId=${userId}`;
+      queryUrl = `${process.env.REACT_APP_BACKEND_URL}/user/id/friends?userId=${userId}`;
     } else {
-      queryUrl = "http://localhost:3001/user/getFriendsByUserId";
+      queryUrl = `${process.env.REACT_APP_BACKEND_URL}/user/id/friends`;
     }
     axios
       .get(queryUrl, prepareHeaders(document.cookie))

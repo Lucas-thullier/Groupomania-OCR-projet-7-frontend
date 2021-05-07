@@ -5,7 +5,6 @@ import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { prepareHeaders } from "../Utils/utils";
 import PostReaction from "../PostReaction/PostReaction";
 import FeedPostComments from "../FeedPostComments/FeedPostComments";
-import CommentsTypeToggler from "../CommentsTypeToggler/CommentsTypeToggler";
 const redditElement = <FontAwesomeIcon icon={faReddit} className="redditLoaderIcon" />;
 require("./Submission.css");
 
@@ -19,7 +18,11 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
       submissionId: submission.submissionId,
     };
     axios
-      .post("http://localhost:3001/reddit/createRedditComment", dataToCreateRedditComment, prepareHeaders(document.cookie))
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/reddit/createRedditComment`,
+        dataToCreateRedditComment,
+        prepareHeaders(document.cookie)
+      )
       .then(() => {
         console.log("ok");
       })
@@ -32,7 +35,7 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
     if (withComments) {
       axios
         .get(
-          `http://localhost:3001/reddit/getCommentsById?submissionId=${submission.submissionId}`,
+          `${process.env.REACT_APP_BACKEND_URL}/reddit/comment/id?submissionId=${submission.submissionId}`,
           prepareHeaders(document.cookie)
         )
         .then((commentsResponse) => {
@@ -82,12 +85,7 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
         {withPostReaction ? <PostReaction handleSubmit={handleSubmit} /> : <></>}
       </div>
 
-      {withComments && comments ? <CommentsTypeToggler /> : <></>}
-      {withComments && comments ? (
-        Object.keys(comments).map((comment, key) => <FeedPostComments key={key} comments={comments[comment]} />)
-      ) : (
-        <></>
-      )}
+      {withComments && comments ? <FeedPostComments comments={comments} /> : <></>}
     </>
   );
 };

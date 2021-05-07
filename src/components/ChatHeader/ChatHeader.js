@@ -21,10 +21,7 @@ const ConversationHeader = ({ selectedConversation, setSelectedConversation, set
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:3001/conversation/getConversationbyId?id=${selectedConversation.id}`,
-        prepareHeaders(document.cookie)
-      )
+      .get(`${process.env.REACT_APP_BACKEND_URL}/conversation/id?id=${selectedConversation.id}`, prepareHeaders(document.cookie))
       .then((singleConv) => {
         setSelectedConversation(singleConv.data);
       })

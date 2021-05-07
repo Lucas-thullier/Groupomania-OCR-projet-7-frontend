@@ -12,11 +12,15 @@ const MessagesFlow = ({ allMessages }) => {
   return (
     <div className="messagesFlow">
       {allMessages.map((singleMessage, key) => (
-        <div key={key} className={singleMessage.User.id == userId ? "oneMessage self" : "oneMessage other"} id={singleMessage.User.id}>
+        <div
+          key={key}
+          className={singleMessage.User.id == userId ? "oneMessage self" : "oneMessage other"}
+          id={singleMessage.User.id}
+        >
           <ProfilPicture imageUrl={singleMessage.User.imageUrl} />
           <div className="textContent">
             <p className="username">{singleMessage.User.username}</p>
-            <p className="messageContent">{singleMessage.text_content}</p>
+            <p className="messageContent">{singleMessage.textContent}</p>
           </div>
         </div>
       ))}

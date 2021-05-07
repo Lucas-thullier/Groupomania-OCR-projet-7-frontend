@@ -10,7 +10,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/checkIfLogged", prepareHeaders(document.cookie))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/checkIfLogged`, prepareHeaders(document.cookie))
       .then((response) => {
         if (response.status === 200) {
           setRequestDone(true);

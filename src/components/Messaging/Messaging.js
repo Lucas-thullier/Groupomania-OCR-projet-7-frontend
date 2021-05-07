@@ -20,7 +20,7 @@ const Messaging = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/conversation/getAllConvByUserId`, prepareHeaders(document.cookie))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/conversation/all/userId`, prepareHeaders(document.cookie))
       .then((allConversationsResponse) => {
         setAllConversations(allConversationsResponse.data);
       })

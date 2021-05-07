@@ -19,7 +19,7 @@ const SingleUserSearchPreview = ({ singleSearchResult }) => {
       createConversation(singleSearchResult.id);
       axios
         .get(
-          `http://localhost:3001/conversation/getConversationByUserAndFriendId?friendId=${singleSearchResult.id}`,
+          `${process.env.REACT_APP_BACKEND_URL}/conversation/getConversationByUserAndFriendId?friendId=${singleSearchResult.id}`,
           prepareHeaders(document.cookie)
         )
         .then((test) => {
@@ -38,7 +38,7 @@ const SingleUserSearchPreview = ({ singleSearchResult }) => {
         newFriendId: singleSearchResult.id,
       };
       postData = JSON.stringify(postData);
-      axios.post("http://localhost:3001/user/addFriend", postData, prepareHeaders(document.cookie));
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/friend/add`, postData, prepareHeaders(document.cookie));
     }
 
     function createConversation(friendId) {
@@ -47,7 +47,11 @@ const SingleUserSearchPreview = ({ singleSearchResult }) => {
       };
       dataForNewConversation = JSON.stringify(dataForNewConversation);
       axios
-        .post("http://localhost:3001/conversation/createConversation", dataForNewConversation, prepareHeaders(document.cookie))
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/conversation/createConversation`,
+          dataForNewConversation,
+          prepareHeaders(document.cookie)
+        )
         .then((result) => {
           // setIsNewConversation(true);
         })

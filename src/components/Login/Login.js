@@ -16,7 +16,7 @@ const Login = () => {
 
     const jsonUserData = JSON.stringify(userData);
     axios
-      .post("http://localhost:3001/user/login", jsonUserData, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, jsonUserData, {
         headers: {
           "content-type": "application/json",
         },

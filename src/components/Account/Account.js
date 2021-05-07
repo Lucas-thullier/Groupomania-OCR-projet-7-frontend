@@ -15,7 +15,7 @@ const Account = () => {
     const jsonUserData = JSON.stringify(userData);
 
     axios
-      .post("http://localhost:3001/user/signup", jsonUserData, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, jsonUserData, {
         headers: {
           "content-type": "application/json",
         },

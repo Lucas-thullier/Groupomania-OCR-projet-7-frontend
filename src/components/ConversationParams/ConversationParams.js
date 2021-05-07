@@ -14,7 +14,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
 
     axios
       .post(
-        "http://localhost:3001/conversation/changeConversationPicture",
+        `${process.env.REACT_APP_BACKEND_URL}/conversation/changeConversationPicture`,
         formData,
         prepareHeaders(document.cookie, "multipart/form-data")
       )
@@ -29,7 +29,7 @@ const ConversationParams = ({ convId, setIsPictureChanged, conversation }) => {
   const leaveConversation = (conversationId) => (clickEvent) => {
     axios
       .put(
-        "http://localhost:3001/conversation/leaveConversation",
+        `${process.env.REACT_APP_BACKEND_URL}/conversation/leaveConversation`,
         { conversationId: conversationId },
         prepareHeaders(document.cookie)
       )

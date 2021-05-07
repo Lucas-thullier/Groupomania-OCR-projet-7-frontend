@@ -12,7 +12,7 @@ const UserPage = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/user/userById?userId=${id}`, prepareHeaders(document.cookie))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/user/${id}`, prepareHeaders(document.cookie))
       .then((response) => {
         setUserData(response.data);
       })

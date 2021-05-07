@@ -6,7 +6,7 @@ const SubredditsNav = ({ subredditsList, setSubmissionsList }) => {
   const loadSubreddit = (subredditId) => (clickEvent) => {
     setSubmissionsList(null);
     axios
-      .get(`http://localhost:3001/reddit/getSubreddit?subredditId=${subredditId}`, prepareHeaders(document.cookie))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/reddit/subreddit?subredditId=${subredditId}`, prepareHeaders(document.cookie))
       .then((subreddit) => {
         setSubmissionsList(subreddit.data);
       })

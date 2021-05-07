@@ -11,13 +11,13 @@ const UserHead = ({ userData }) => {
       newFriendId: userData.id,
     };
     postData = JSON.stringify(postData);
-    axios.post("http://localhost:3001/user/addFriend", postData, prepareHeaders(document.cookie));
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/friend/add`, postData, prepareHeaders(document.cookie));
   };
 
   const deleteFriend = () => {
     const friendId = userData.id;
     axios
-      .delete(`http://localhost:3001/friends/deleteFriend?friendId=${friendId}`, prepareHeaders(document.cookie))
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/friend/delete?friendId=${friendId}`, prepareHeaders(document.cookie))
       .then((deletionResponse) => {
         console.log(deletionResponse);
       })
@@ -32,7 +32,7 @@ const UserHead = ({ userData }) => {
     const formData = new FormData();
     formData.append("image", newProfilPicture);
     axios.post(
-      "http://localhost:3001/user/changeProfilPicture",
+      `${process.env.REACT_APP_BACKEND_URL}/user/profil-picture/change`,
       formData,
       prepareHeaders(document.cookie, "multipart/form-data")
     );

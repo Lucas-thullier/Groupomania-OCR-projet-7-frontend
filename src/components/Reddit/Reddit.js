@@ -18,7 +18,7 @@ const Reddit = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/reddit/getHotSubreddits", prepareHeaders(document.prepareHeaders))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/reddit/hot-submissions`, prepareHeaders(document.prepareHeaders))
       .then((submissionsListResponse) => {
         setSubmissionsList(submissionsListResponse.data);
       })
@@ -29,7 +29,7 @@ const Reddit = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/reddit/getPopularSubreddits", prepareHeaders(document.cookie))
+      .get(`${process.env.REACT_APP_BACKEND_URL}/reddit/popular-subreddits`, prepareHeaders(document.cookie))
       .then((popularSubreddit) => {
         setSubredditsList(popularSubreddit.data);
       })

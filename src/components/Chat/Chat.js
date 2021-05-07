@@ -4,9 +4,7 @@ import { prepareHeaders } from "../Utils/utils";
 import PostReaction from "../PostReaction/PostReaction";
 import MessagesFlow from "../MessagesFlow/MessagesFlow";
 import ChatHeader from "../ChatHeader/ChatHeader";
-import { CSSTransition } from "react-transition-group";
-
-require("./Chat.css");
+import "./Chat.css";
 
 const Chat = ({ selectedConversation, setSelectedConversation }) => {
   const [allMessages, setAllMessages] = useState(null);
@@ -15,8 +13,12 @@ const Chat = ({ selectedConversation, setSelectedConversation }) => {
 
   useEffect(() => {
     const conversationId = selectedConversation.id;
+
     axios
-      .get(`http://localhost:3001/messages/getMessagesByConvId?convId=${conversationId}`, prepareHeaders(document.cookie))
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/message/conversationId?convId=${conversationId}`,
+        prepareHeaders(document.cookie)
+      )
       .then((allMessages) => {
         setAllMessages(allMessages.data);
       })
@@ -33,7 +35,7 @@ const Chat = ({ selectedConversation, setSelectedConversation }) => {
         convId: selectedConversation.id,
       });
       axios
-        .post("http://localhost:3001/messages/newMessage", messageToSend, prepareHeaders(document.cookie))
+        .post(`${process.env.REACT_APP_BACKEND_URL}/message/create`, messageToSend, prepareHeaders(document.cookie))
         .then((response) => {
           if (response.data.message === "true") {
             setIsMessageSend(true);
