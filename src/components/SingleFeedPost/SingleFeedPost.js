@@ -7,10 +7,18 @@ import axios from "axios";
 import { prepareHeaders } from "../Utils/utils";
 import { useEffect, useState } from "react";
 
-const SingleFeedPost = ({ singlePost }) => {
+const SingleFeedPost = ({ singlePost, parity }) => {
   const [needRefresh, setNeedRefresh] = useState(true);
   const [comments, setComments] = useState([]);
   const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    if (document.querySelector(".even, .odd")) {
+      document.querySelectorAll(".even, .odd").forEach((singlePost) => {
+        singlePost.style.transform = "translateX(0)";
+      });
+    }
+  }, [singlePost]);
 
   const handleSubmit = (messageContent) => (submitEvent) => {
     submitEvent.preventDefault();
@@ -48,7 +56,7 @@ const SingleFeedPost = ({ singlePost }) => {
   }, [needRefresh]);
 
   return (
-    <div className="singleFeedPost">
+    <div className={`singleFeedPost ${parity}`}>
       <div className="postContent">
         <ProfilPicture imageUrl={singlePost.User.imageUrl} />
         <p className="username">{singlePost.User.username}</p>

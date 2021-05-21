@@ -15,4 +15,11 @@ body #root {
   background-color: #121212;
   color: white;
 }
+
+button,
+input {
+  background-color: rgba(255, 255, 255, 0);
+  border-color: rgba(18, 18, 18, 0);
+  color: white;
+}
 /*# sourceMappingURL=App.css.map */

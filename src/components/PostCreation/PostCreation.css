@@ -4,6 +4,12 @@
           flex: 1;
   background-color: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
+  -webkit-transform: translateY(-700px);
+          transform: translateY(-700px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
 }
 
 .postCreation form {

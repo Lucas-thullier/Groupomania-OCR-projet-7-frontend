@@ -1,11 +1,10 @@
 .searchWrapper {
-  -webkit-box-flex: 0.03;
-      -ms-flex: 0.03;
-          flex: 0.03;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .searchWrapper .searchBar {
-  position: absolute;
   z-index: 5;
 }
 

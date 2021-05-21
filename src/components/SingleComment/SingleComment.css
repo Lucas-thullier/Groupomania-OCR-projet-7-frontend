@@ -6,6 +6,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  padding: 3px 0;
 }
 
 .singleComment:hover {
@@ -19,6 +20,9 @@
 .singleComment .profilPicture {
   width: 3vw;
   height: 3vh;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .singleComment .commentData {
@@ -32,6 +36,10 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.singleComment .commentData .commentUsername {
+  font-weight: 600;
 }
 
 .singleComment .commentData p {

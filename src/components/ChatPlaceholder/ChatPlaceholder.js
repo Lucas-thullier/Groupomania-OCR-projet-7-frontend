@@ -14,7 +14,6 @@ const ChatPlaceholder = () => {
       setTimeout(() => {
         test.current.style.transform = "translateY(1000px)";
       }, 1000);
-      // Your code here.
     };
   }, []);
 

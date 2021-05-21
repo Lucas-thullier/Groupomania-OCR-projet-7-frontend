@@ -10,5 +10,6 @@
       -ms-flex-pack: center;
           justify-content: center;
   margin: 1rem 5rem;
+  overflow: hidden;
 }
 /*# sourceMappingURL=FeedPost.css.map */

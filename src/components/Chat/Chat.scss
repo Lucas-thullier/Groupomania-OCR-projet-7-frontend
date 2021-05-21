@@ -1,6 +1,4 @@
 .chat {
-  // transform: translateX(-2000px);
-  // transition: transform 500ms ease-in-out;
   flex-direction: column;
   &-enter-active {
     background-color: red !important;
@@ -24,6 +22,11 @@
     justify-content: space-between;
   }
 }
+
+.chatBody {
+  overflow-y: scroll;
+}
+
 .chat,
 .chatBody {
   background-color: rgba(255, 255, 255, 0.08);

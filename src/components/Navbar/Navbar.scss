@@ -4,6 +4,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 6vh;
 
   ul {
     display: flex;
@@ -22,5 +23,6 @@
   }
   a {
     color: white;
+    flex: 1;
   }
 }

@@ -9,6 +9,7 @@ import UserHead from "../UserHead/UserHead";
 const UserPage = () => {
   let { id } = useParams();
   const [userData, setUserData] = useState();
+  const [amIFriendWithHim, setAmIFriendWithHim] = useState(false);
 
   useEffect(() => {
     axios
@@ -24,10 +25,8 @@ const UserPage = () => {
   if (userData) {
     return (
       <section className="userPanel">
-        <UserHead userData={userData} />
-        <div className="userBody">
-          <FriendList userId={userData.id} />
-        </div>
+        <UserHead userData={userData} amIFriendWithHim={amIFriendWithHim} />
+        <FriendList userId={userData.id} setAmIFriendWithHim={setAmIFriendWithHim} />
       </section>
     );
   } else {

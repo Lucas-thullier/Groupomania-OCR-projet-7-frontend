@@ -9,6 +9,13 @@
 }
 
 .modal .modal-main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border-radius: 4px;
   position: fixed;
   background-color: #121212;
@@ -21,16 +28,10 @@
   overflow: hidden;
   max-height: 100vh;
   overflow-y: scroll;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .modal .modal-main .closeModal {
+  cursor: pointer;
   text-align: right;
   font-size: 1.5rem;
   background-color: rgba(255, 255, 255, 0);
@@ -39,7 +40,13 @@
 }
 
 .display-block {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .display-none {

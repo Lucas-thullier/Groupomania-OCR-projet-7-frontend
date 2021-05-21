@@ -17,8 +17,8 @@ const ConversationsPanel = ({ allConversations, setSelectedConversation }) => {
             }}
             key={key}
           >
-            <ProfilPicture imageUrl={singleConversation.imageUrl} />
-            <div>{singleConversation.name ? singleConversation.name : singleConversation.Users.map((user, key) => <div key={key}>{user.username}</div>)}</div>
+            <ProfilPicture imageUrl={singleConversation.friend.imageUrl} />
+            <div>{singleConversation.friend.username ? singleConversation.friend.username : "Mais qui est-ce?"}</div>
           </li>
         ))}
       </ul>

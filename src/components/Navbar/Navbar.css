@@ -13,6 +13,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 6vh;
 }
 
 .mainNavbar ul {
@@ -40,5 +41,8 @@
 
 .mainNavbar a {
   color: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 /*# sourceMappingURL=Navbar.css.map */

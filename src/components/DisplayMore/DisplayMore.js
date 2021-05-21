@@ -6,7 +6,11 @@ const DisplayMore = ({ offset, setOffset, setNeedRefresh }) => {
     setNeedRefresh(true);
   };
 
-  return <button onClick={handleClick}>Afficher plus</button>;
+  return (
+    <button className="displayMore" onClick={handleClick}>
+      Afficher plus
+    </button>
+  );
 };
 
 export default DisplayMore;

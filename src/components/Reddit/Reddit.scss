@@ -1,29 +1,6 @@
 .redditFlow {
   flex: 1;
   display: flex;
-  .popularSubreddits {
-    position: absolute;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-
-    :hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-    .singleSubreddit {
-      padding: 0.2rem 0;
-    }
-  }
-
-  .submissionTitle {
-    flex: 1;
-    margin: 0;
-    padding: 1rem;
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  }
 }
 
 .redditLoader {

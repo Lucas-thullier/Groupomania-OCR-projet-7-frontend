@@ -1,4 +1,13 @@
-.modalSubmission {
+#submissionAuthor {
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  margin: 0;
+  padding: 12px 8px;
+}
+
+.singlePost {
+  background-color: rgba(255, 255, 255, 0.05);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -6,16 +15,54 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin: 2rem 15rem;
+  max-height: 60vw;
+  overflow: hidden;
 }
 
-.modalSubmission .divImg {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  max-height: 70vh;
+.singlePost .submissionTitle {
+  overflow: hidden;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0;
+  padding: 0.5rem;
 }
 
-.modalSubmission .divImg img {
+.singlePost .submissionTitle a {
+  color: white;
+  text-decoration: none;
+}
+
+.singlePost.even {
+  -webkit-transform: translateX(-2000px);
+          transform: translateX(-2000px);
+}
+
+.singlePost.odd {
+  -webkit-transform: translateX(2000px);
+          transform: translateX(2000px);
+}
+
+.singlePost #subredditAuthor {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.singlePost .divImg {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  max-height: 60vh;
+  max-width: 70vh;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.singlePost .divImg img {
+  width: 50vw;
+  height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
   -webkit-box-flex: 1;
@@ -23,7 +70,46 @@
           flex: 1;
 }
 
-.modalSubmission .commentsList {
+.singlePost video {
+  width: 100%;
+  max-height: 60vh;
+}
+
+.singlePost .comments {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.singlePost .comments div {
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5;
+          flex: 0.5;
+  text-align: center;
+}
+
+.modal .modal-main .singlePost {
+  background-color: rgba(255, 255, 255, 0);
+  overflow: visible;
+  margin: 0;
+}
+
+.modal .modal-main .singlePost img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.modal .modal-main .singlePost .commentsList {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,7 +119,7 @@
           flex-direction: column;
 }
 
-.modalSubmission .commentsList .singleComment {
+.modal .modal-main .singlePost .commentsList .singleComment {
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.1);
   margin: 0.5rem 0;

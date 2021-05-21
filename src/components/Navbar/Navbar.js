@@ -17,7 +17,6 @@ const signOutElement = <FontAwesomeIcon icon={faSignOutAlt} />;
 const Navbar = () => {
   const searchFor = "users";
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  // const userId = localStorage.getItem("userId");
 
   const disconnect = () => {
     clearAuthCookie();

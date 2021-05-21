@@ -5,6 +5,16 @@
   flex-direction: column;
   margin: 1rem 0;
 
+  &.even {
+    transform: translateX(1000px);
+    transition: transform 500ms ease-in-out;
+  }
+
+  &.odd {
+    transform: translateX(-1000px);
+    transition: transform 500ms ease-in-out;
+  }
+
   .postContent {
     display: grid;
     grid-template-columns: 0.1fr 1fr;

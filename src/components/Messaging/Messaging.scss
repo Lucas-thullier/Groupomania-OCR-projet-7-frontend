@@ -1,7 +1,8 @@
 .messaging {
   display: flex;
   flex-direction: row;
-  flex: 1;
   background-color: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  height: 94vh;
   overflow: hidden;
 }

@@ -4,7 +4,7 @@ require("./MessagesFlow.css");
 
 const MessagesFlow = ({ allMessages }) => {
   useEffect(() => {
-    const MessagesFlowDiv = document.getElementsByClassName("messagesFlow")[0];
+    const MessagesFlowDiv = document.getElementsByClassName("chatBody")[0];
     MessagesFlowDiv.scrollTop = MessagesFlowDiv.scrollHeight;
   }, [allMessages]);
 

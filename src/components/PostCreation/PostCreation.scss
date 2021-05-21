@@ -2,6 +2,9 @@
   flex: 1;
   background-color: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
+
+  transform: translateY(-700px);
+  transition: transform 500ms ease-in-out;
   form {
     flex: 0.5;
     display: flex;

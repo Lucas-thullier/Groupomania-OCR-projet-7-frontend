@@ -11,6 +11,24 @@
   margin: 1rem 0;
 }
 
+.singleFeedPost.even {
+  -webkit-transform: translateX(1000px);
+          transform: translateX(1000px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+}
+
+.singleFeedPost.odd {
+  -webkit-transform: translateX(-1000px);
+          transform: translateX(-1000px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+}
+
 .singleFeedPost .postContent {
   display: -ms-grid;
   display: grid;

@@ -1,1 +1,51 @@
-/* No CSS *//*# sourceMappingURL=UserHead.css.map */
+.userHead {
+  background-color: rgba(255, 255, 255, 0.08);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  place-items: center;
+  -webkit-transform: translateY(-700px);
+          transform: translateY(-700px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+}
+
+.userHead .interactWithUser {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: end;
+      align-self: end;
+  position: absolute;
+}
+
+.userHead .interactWithUser button {
+  font-size: 1.3rem;
+  border-style: hidden;
+  cursor: pointer;
+}
+
+.userHead .interactWithUser button.deleteFriend {
+  color: red;
+  padding: 3px 8px;
+}
+
+.userHead .interactWithUser button.addUserButton {
+  color: green;
+  padding: 3px 8px;
+}
+
+.userHead #actualUsername {
+  font-size: 1.3rem;
+}
+
+.userHead #actualUsername:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=UserHead.css.map */

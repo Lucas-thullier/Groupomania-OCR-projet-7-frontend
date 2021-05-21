@@ -8,28 +8,8 @@ import FeedPostComments from "../FeedPostComments/FeedPostComments";
 const redditElement = <FontAwesomeIcon icon={faReddit} className="redditLoaderIcon" />;
 require("./Submission.css");
 
-const Submission = ({ submission, showModal, withComments, withPostReaction }) => {
+const Submission = ({ submission, showModal, withComments }) => {
   const [comments, setComments] = useState(null);
-
-  const handleSubmit = (messageContent) => (submitEvent) => {
-    submitEvent.preventDefault();
-    const dataToCreateRedditComment = {
-      textContent: messageContent,
-      submissionId: submission.submissionId,
-    };
-    axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_URL}/reddit/createRedditComment`,
-        dataToCreateRedditComment,
-        prepareHeaders(document.cookie)
-      )
-      .then(() => {
-        console.log("ok");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
     if (withComments) {
@@ -62,14 +42,15 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
     }
   }
 
+  const handleClickOnPost = () => {
+    if (!document.querySelector(".modal-main > .singlePost")) {
+      showModal(submission);
+    }
+  };
+
   return (
     <>
-      <div
-        className="singlePost"
-        onClick={() => {
-          showModal(submission);
-        }}
-      >
+      <div className="singlePost" onClick={handleClickOnPost}>
         <div className="submissionTitle">
           <a href={submission.url} onClick={(clickEvent) => clickEvent.stopPropagation()} target="_blank">
             {submission.title}
@@ -82,10 +63,9 @@ const Submission = ({ submission, showModal, withComments, withPostReaction }) =
         <p id="submissionAuthor">
           {submission.author} in {submission.subredditNamePrefixed}
         </p>
-        {withPostReaction ? <PostReaction handleSubmit={handleSubmit} /> : <></>}
       </div>
 
-      {withComments && comments ? <FeedPostComments comments={comments} /> : <></>}
+      {comments ? <FeedPostComments comments={comments} /> : <></>}
     </>
   );
 };

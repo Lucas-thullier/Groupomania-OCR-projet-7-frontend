@@ -1,8 +1,15 @@
 import axios from "axios";
 import { prepareHeaders } from "../Utils/utils";
+import { useEffect } from "react";
 import "./PostCreation.css";
 
 const PostCreation = ({ setIsNewPost }) => {
+  useEffect(() => {
+    if (document.querySelector(".postCreation")) {
+      document.querySelector(".postCreation").style.transform = "translateY(0)";
+    }
+  }, []);
+
   const createNewPost = (submitEvent) => {
     submitEvent.preventDefault();
 

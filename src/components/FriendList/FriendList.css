@@ -9,6 +9,15 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin-top: 2rem;
+  -webkit-transform: translateX(-700px);
+          transform: translateX(-700px);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
 }
 
 .friendList .singleFriend {

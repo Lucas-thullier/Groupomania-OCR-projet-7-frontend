@@ -11,22 +11,6 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-.userPanel .userHead {
-  background-color: rgba(255, 255, 255, 0.08);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  place-items: center;
-}
-
-.userPanel .userBody {
-  background-color: rgba(255, 255, 255, 0.08);
-  margin-top: 2rem;
+  overflow: hidden;
 }
 /*# sourceMappingURL=UserPage.css.map */

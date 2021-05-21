@@ -11,16 +11,28 @@ const FeedPost = () => {
   const [offset, setOffset] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(undefined);
+  const [needFetchPost, setNeedFetchPost] = useState(true);
+  const [feedPostCount, setFeedPostCount] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/feedpost/user?offset=${offset}`, prepareHeaders(document.cookie))
-      .then((feedPostResponse) => {
-        setFeedPosts(feedposts.concat(feedPostResponse.data));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (needFetchPost) {
+      axios
+        .get(`${process.env.REACT_APP_BACKEND_URL}/feedpost/user?offset=${offset}`, prepareHeaders(document.cookie))
+        .then((feedPostResponse) => {
+          const fetchedFeedPosts = feedPostResponse.data;
+          const fetchedFeedPostsCount = fetchedFeedPosts.length;
+          const actualFeedPostCount = feedposts.length;
+          if (fetchedFeedPostsCount + actualFeedPostCount == feedPostCount) {
+            setNeedFetchPost(false);
+          } else {
+            setFeedPosts(feedposts.concat(fetchedFeedPosts));
+            setFeedPostCount(actualFeedPostCount + fetchedFeedPostsCount);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, [isNewPost, offset]);
 
   useEffect(() => {
@@ -35,15 +47,22 @@ const FeedPost = () => {
 
   useEffect(() => {
     if (windowHeight != 0 && scrollPosition == windowHeight) {
-      const temporaryOffset = offset;
       setOffset(offset + 5);
     }
   }, [scrollPosition]);
 
+  const whichParity = (key) => {
+    return key % 2 == 0 ? "even" : "odd";
+  };
+
   return (
     <section className="feedPost">
       <PostCreation setIsNewPost={setIsNewPost} />
-      {feedposts.length > 0 ? feedposts.map((singlePost, key) => <SingleFeedPost singlePost={singlePost} key={key} />) : <></>}
+      {feedposts.length > 0 ? (
+        feedposts.map((singlePost, key) => <SingleFeedPost parity={whichParity(key)} singlePost={singlePost} key={key} />)
+      ) : (
+        <></>
+      )}
     </section>
   );
 };
