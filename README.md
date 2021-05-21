@@ -6,7 +6,7 @@ Nous vous recommandons de commencer par l'initialisation du backend.
 
 ## Available Scripts
 
-In the project directory, you can run:
+A la racine vous pouvez executer:
 
 ### `npm install`
 
