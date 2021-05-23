@@ -7,8 +7,9 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faReddit } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "../Shared/SearchBar/SearchBar";
 import { prepareHeaders, clearAuthCookie } from "../Utils/utils";
+
 const userElement = <FontAwesomeIcon icon={faUserAlt} />;
 const redditElement = <FontAwesomeIcon icon={faReddit} />;
 const envelopeElement = <FontAwesomeIcon icon={faEnvelope} />;

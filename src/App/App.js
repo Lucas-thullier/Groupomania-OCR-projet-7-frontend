@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Login from "../components/Login/Login";
+import Login from "../components/Login/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
-import Messaging from "../components/Messaging/Messaging";
-import Account from "../components/Account/Account";
+import Messaging from "../components/Chat/Messaging/Messaging";
+import Account from "../components/Signup/Account/Account";
 import PrivateRoute from "../components/Utils/PrivateRoute";
 import { BrowserRouter as Router, Route, Link, Redirect, useLocation, useHistory, Switch } from "react-router-dom";
-import UserPage from "../components/UserPage/UserPage";
-import Reddit from "../components/Reddit/Reddit";
-import FeedPost from "../components/FeedPost/FeedPost";
+import UserPage from "../components/Userpage/UserPage/UserPage";
+import Reddit from "../components/Reddit/Reddit/Reddit";
+import FeedPost from "../components/FeedPost/FeedPost/FeedPost";
 require("dotenv").config();
 
 export default function App() {
