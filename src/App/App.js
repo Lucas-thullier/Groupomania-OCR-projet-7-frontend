@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Login from "../components/Login/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
-import Messaging from "../components/Chat/Messaging/Messaging";
+import Messaging from "../components/Messaging/Messaging/Messaging";
 import Account from "../components/Signup/Account/Account";
 import PrivateRoute from "../components/Utils/PrivateRoute";
 import { BrowserRouter as Router, Route, Link, Redirect, useLocation, useHistory, Switch } from "react-router-dom";

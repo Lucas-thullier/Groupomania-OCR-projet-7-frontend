@@ -5,7 +5,6 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { faSmile } from "@fortawesome/free-solid-svg-icons";
 import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
 import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
-// import Picker from "emoji-picker-react";
 
 const PaperPlaneElement = <FontAwesomeIcon icon={faPaperPlane} />;
 const smileElement = <FontAwesomeIcon icon={faSmile} />;
