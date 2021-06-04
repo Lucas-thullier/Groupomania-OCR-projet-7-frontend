@@ -2,24 +2,8 @@ import ProfilePicture from '../../Shared/ProfilPicture/ProfilPicture'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import './SingleComment.css'
-import axios from 'axios'
-import { prepareHeaders } from '../../Utils/utils'
 
-const SingleComment = ({ comment, setNeedRefresh }) => {
-  const deleteComment = (commentId) => (clickEvent) => {
-    axios
-      .delete(
-        `${process.env.REACT_APP_BACKEND_URL}/feedpost/comment/delete?commentId=${commentId}`,
-        prepareHeaders(document.cookie)
-      )
-      .then((deletionResponse) => {
-        setNeedRefresh(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
+const SingleComment = ({ comment, deleteComment }) => {
   return (
     <div
       className={

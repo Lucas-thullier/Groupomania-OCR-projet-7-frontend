@@ -11,7 +11,7 @@ const smileElement = <FontAwesomeIcon icon={faSmile} />
 const shareElement = <FontAwesomeIcon icon={faShareAlt} />
 const gifElement = <FontAwesomeIcon icon={faGoodreads} />
 
-const PostReaction = ({ handleSubmit }) => {
+const PostReaction = ({ handleSubmit, singlePostId }) => {
   const [messageContent, setMessageContent] = useState(null)
 
   const onMessageChange = (messageChangeEvent) => {
@@ -24,7 +24,10 @@ const PostReaction = ({ handleSubmit }) => {
       onClick={(clickEvent) => clickEvent.stopPropagation()}
     >
       <div className="shareElement"> {shareElement} </div>
-      <form method="POST" onSubmit={handleSubmit(messageContent)}>
+      <form
+        method="POST"
+        onSubmit={handleSubmit(messageContent, singlePostId)}
+      >
         <input
           autoComplete="off"
           id="sendResponse"

@@ -1,9 +1,8 @@
 import './DisplayMore.css'
 
-const DisplayMore = ({ offset, setOffset, setNeedRefresh }) => {
+const DisplayMore = ({ offset, setOffset }) => {
   const handleClick = () => {
     setOffset(offset + 5)
-    setNeedRefresh(true)
   }
 
   return (
