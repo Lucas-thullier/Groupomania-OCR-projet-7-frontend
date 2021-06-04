@@ -1,12 +1,9 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import './FriendList.css'
-import { prepareHeaders } from '../../Utils/utils'
+import React, { useEffect } from 'react'
 import ProfilePicture from '../../Shared/ProfilPicture/ProfilPicture'
 import { useHistory } from 'react-router'
+import './FriendList.css'
 
-const FriendList = ({ userId, setAmIFriendWithHim }) => {
-  const [friendList, setFriendList] = useState(null)
+const FriendList = ({ friendList }) => {
   const history = useHistory()
 
   useEffect(() => {
@@ -15,31 +12,6 @@ const FriendList = ({ userId, setAmIFriendWithHim }) => {
         'translateX(0)'
     }
   }, [friendList])
-
-  useEffect(() => {
-    let queryUrl
-    if (userId) {
-      queryUrl = `${process.env.REACT_APP_BACKEND_URL}/user/${userId}/friends`
-    } else {
-      queryUrl = `${process.env.REACT_APP_BACKEND_URL}/user/id/friends`
-    }
-    axios
-      .get(queryUrl, prepareHeaders(document.cookie))
-      .then((friendsResponse) => {
-        setFriendList(friendsResponse.data)
-
-        if (friendList) {
-          friendList.forEach((friend) => {
-            if (friend.id == localStorage.getItem('userId')) {
-              setAmIFriendWithHim(true)
-            }
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [userId])
 
   const handleClick = (userId) => () => {
     history.push(`/userPage/${userId}`)

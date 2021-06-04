@@ -9,59 +9,18 @@ import ProfilePicture from '../../Shared/ProfilPicture/ProfilPicture'
 import { prepareHeaders } from '../../Utils/utils'
 import { useState, useEffect } from 'react'
 
-const UserHead = ({ userData, amIFriendWithHim }) => {
-  const [pictureUrl, setPictureUrl] = useState(userData.imageUrl)
-
+const UserHead = ({
+  userData,
+  amIFriendWithHim,
+  deleteFriend,
+  addFriend,
+  changeProfilPicture,
+  setPictureUrl,
+  pictureUrl,
+}) => {
   useEffect(() => {
     document.querySelector('.userHead').style.transform = 'translateY(0)'
   }, [])
-
-  const addFriend = () => {
-    let postData = {
-      newFriendId: userData.id,
-    }
-    postData = JSON.stringify(postData)
-    axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/friend/add`,
-      postData,
-      prepareHeaders(document.cookie)
-    )
-  }
-
-  const deleteFriend = () => {
-    const friendId = userData.id
-    axios
-      .delete(
-        `${process.env.REACT_APP_BACKEND_URL}/friend/delete?friendId=${friendId}`,
-        prepareHeaders(document.cookie)
-      )
-      .then((deletionResponse) => {
-        console.log(deletionResponse)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const changeProfilPicture = (submitEvent) => {
-    submitEvent.preventDefault()
-    const newProfilPicture = document.querySelector(
-      'input#newProfilPicture'
-    ).files[0]
-    const formData = new FormData()
-    formData.append('image', newProfilPicture)
-    axios
-      .put(
-        `${process.env.REACT_APP_BACKEND_URL}/user/profil-picture/change`,
-        formData,
-        prepareHeaders(document.cookie, 'multipart/form-data')
-      )
-      .then((response) => {
-        const newPictureUrl = response.data
-        setPictureUrl(newPictureUrl)
-      })
-      .catch((error) => console.log(error))
-  }
 
   const toggleToInput = () => {
     if (isMyPage()) {
