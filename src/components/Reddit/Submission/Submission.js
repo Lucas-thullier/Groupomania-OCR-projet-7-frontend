@@ -1,30 +1,12 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReddit } from '@fortawesome/free-brands-svg-icons'
-import { prepareHeaders } from '../../Utils/utils'
 import FeedPostComments from '../../FeedPost/FeedPostComments/FeedPostComments'
 const redditElement = (
   <FontAwesomeIcon icon={faReddit} className="redditLoaderIcon" />
 )
 require('./Submission.css')
 
-const Submission = ({ submission, showModal, withComments }) => {
-  const [comments, setComments] = useState(null)
-
-  useEffect(() => {
-    if (withComments) {
-      axios
-        .get(
-          `${process.env.REACT_APP_BACKEND_URL}/reddit/comment/id?submissionId=${submission.submissionId}`,
-          prepareHeaders(document.cookie)
-        )
-        .then((commentsResponse) => {
-          setComments(commentsResponse.data)
-        })
-    }
-  }, [withComments])
-
+const Submission = ({ submission, showModal, comments }) => {
   function embedContent(embedContent) {
     if (!embedContent) {
       return <></>

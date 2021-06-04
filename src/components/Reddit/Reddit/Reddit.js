@@ -17,6 +17,7 @@ const Reddit = () => {
   const [isModalActive, setIsModalActive] = useState(false)
   const [submission, setSubmission] = useState(null)
   const [subredditsList, setSubredditsList] = useState(null)
+  const [comments, setComments] = useState(null)
 
   useEffect(() => {
     axios
@@ -46,6 +47,34 @@ const Reddit = () => {
       })
   }, [])
 
+  const loadSubreddit = (subredditId) => (clickEvent) => {
+    setSubmissionsList(null)
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/reddit/subreddit?subredditId=${subredditId}`,
+        prepareHeaders(document.cookie)
+      )
+      .then((subreddit) => {
+        setSubmissionsList(subreddit.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  useEffect(() => {
+    if (isModalActive) {
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL}/reddit/comment/id?submissionId=${submission.submissionId}`,
+          prepareHeaders(document.cookie)
+        )
+        .then((commentsResponse) => {
+          setComments(commentsResponse.data)
+        })
+    }
+  }, [isModalActive])
+
   const showModal = (submission) => {
     setSubmission(submission)
     setIsModalActive(true)
@@ -61,6 +90,7 @@ const Reddit = () => {
         <SubredditsNav
           subredditsList={subredditsList}
           setSubmissionsList={setSubmissionsList}
+          loadSubreddit={loadSubreddit}
         />
       ) : (
         <></>
@@ -74,8 +104,12 @@ const Reddit = () => {
         <div className="redditLoader">{redditElement}</div>
       )}
       <Modal show={isModalActive} handleClose={hideModal}>
-        {isModalActive ? (
-          <Submission submission={submission} withComments={true} />
+        {isModalActive && comments ? (
+          <Submission
+            submission={submission}
+            withComments={true}
+            comments={comments}
+          />
         ) : (
           <></>
         )}

@@ -20,7 +20,7 @@ const SingleComment = ({ comment, deleteComment }) => {
       <FontAwesomeIcon
         icon={faTimes}
         className="deletionCross"
-        onClick={deleteComment(comment.id)}
+        onClick={deleteComment ? deleteComment(comment.id) : null}
       />
     </div>
   )
