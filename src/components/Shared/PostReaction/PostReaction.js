@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
-import "./PostReaction.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { faSmile } from "@fortawesome/free-solid-svg-icons";
-import { faShareAlt } from "@fortawesome/free-solid-svg-icons";
-import { faGoodreads } from "@fortawesome/free-brands-svg-icons";
+import React, { useEffect, useState } from 'react'
+import './PostReaction.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faSmile } from '@fortawesome/free-solid-svg-icons'
+import { faShareAlt } from '@fortawesome/free-solid-svg-icons'
+import { faGoodreads } from '@fortawesome/free-brands-svg-icons'
 
-const PaperPlaneElement = <FontAwesomeIcon icon={faPaperPlane} />;
-const smileElement = <FontAwesomeIcon icon={faSmile} />;
-const shareElement = <FontAwesomeIcon icon={faShareAlt} />;
-const gifElement = <FontAwesomeIcon icon={faGoodreads} />;
+const PaperPlaneElement = <FontAwesomeIcon icon={faPaperPlane} />
+const smileElement = <FontAwesomeIcon icon={faSmile} />
+const shareElement = <FontAwesomeIcon icon={faShareAlt} />
+const gifElement = <FontAwesomeIcon icon={faGoodreads} />
 
 const PostReaction = ({ handleSubmit }) => {
-  const [messageContent, setMessageContent] = useState(null);
+  const [messageContent, setMessageContent] = useState(null)
 
   const onMessageChange = (messageChangeEvent) => {
-    setMessageContent(messageChangeEvent.target.value);
-  };
+    setMessageContent(messageChangeEvent.target.value)
+  }
 
   return (
-    <div className="postReaction" onClick={(clickEvent) => clickEvent.stopPropagation()}>
+    <div
+      className="postReaction"
+      onClick={(clickEvent) => clickEvent.stopPropagation()}
+    >
       <div className="shareElement"> {shareElement} </div>
       <form method="POST" onSubmit={handleSubmit(messageContent)}>
         <input
@@ -37,7 +40,7 @@ const PostReaction = ({ handleSubmit }) => {
         <li> {gifElement} </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default PostReaction;
+export default PostReaction

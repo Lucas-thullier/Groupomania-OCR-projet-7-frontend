@@ -1,27 +1,29 @@
 exports.prepareHeaders = (cookiesString, otherContentType = null) => {
-  const authToken = getAuthToken(cookiesString);
+  const authToken = getAuthToken(cookiesString)
   const headers = {
     headers: {
       authorization: authToken,
-      "content-type": "application/json",
+      'content-type': 'application/json',
     },
-  };
-  if (otherContentType) {
-    headers["content-type"] = otherContentType;
   }
-  return headers;
-};
+  if (otherContentType) {
+    headers['content-type'] = otherContentType
+  }
+  return headers
+}
 
 exports.clearAuthCookie = () => {
-  document.cookie = "authToken" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=Strict`";
-};
+  document.cookie =
+    'authToken' +
+    '=;expires=Thu, 01 Jan 1970 00:00:00 GMT; sameSite=Strict`'
+}
 
 function getAuthToken(cookiesString) {
-  const authTokenRegex = /(?<=authToken=).+(?=(?:\; |$))/;
+  const authTokenRegex = /(?<=authToken=).+(?=(?:\; |$))/
   if (authTokenRegex.test(cookiesString)) {
-    const authToken = cookiesString.match(authTokenRegex)[0];
-    return authToken;
+    const authToken = cookiesString.match(authTokenRegex)[0]
+    return authToken
   } else {
-    return false;
+    return false
   }
 }
