@@ -12,6 +12,6 @@ A la racine vous pouvez executer:
 
 ### `npm start`
 
-Ouvrez http://localhost:3000 via le navigateur (la commande ci-dessus devrez ouvrir automatique la page)
+Ouvrez http://localhost:3000 via le navigateur (la commande ci-dessus devrait ouvrir automatique la page)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
